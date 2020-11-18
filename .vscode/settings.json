@@ -1,0 +1,16 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#ffa1a18a",
+    "activityBar.activeBorder": "#56d6d6bd",
+    "activityBar.background": "#ffa1a18a",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#56d6d68a",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#56d6d68a",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#f8cdcd"
+  },
+  "peacock.color": "#FF6E6E",
+  "notebook.kernelProviderAssociations": []
+}

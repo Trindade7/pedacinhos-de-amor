@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   template: `
-    <p>
-      home works!
-    </p>
+    <app-banner></app-banner>
   `,
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor () { }
 
   ngOnInit(): void {
   }

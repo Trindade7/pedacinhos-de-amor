@@ -39,7 +39,7 @@ AppComponent = __decorate([
     </ul>
     <router-outlet></router-outlet>
   `,
-        styleUrls: ['./app.component.scss']
+        styleUrls: ['./app.component.less']
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;

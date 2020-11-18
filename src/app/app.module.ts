@@ -6,8 +6,20 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { IconsProviderModule } from './icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { pt_PT } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import pt from '@angular/common/locales/pt';
+
+registerLocaleData(pt);
 
 @NgModule({
   declarations: [
@@ -16,14 +28,26 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
-    CoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    CoreModule,
+    SharedModule,
 
     AppRoutingModule,
 
-    SharedModule,
+    IconsProviderModule,
+
+    NzLayoutModule,
+
+    NzMenuModule,
+
+    FormsModule,
+
+    HttpClientModule,
+
+    BrowserAnimationsModule,
+
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: pt_PT }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

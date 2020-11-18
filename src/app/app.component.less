@@ -1,0 +1,68 @@
+:host {
+  display: flex;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container{
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-layout {
+  height: 100vh;
+  width: 100vw;
+
+
+  .menu-sidebar {
+    position: relative;
+    z-index: 10;
+    min-height: 100%;
+    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  }
+
+  nz-layout.inner-content {
+    padding: 24px;
+    background: #fff;
+    height: 100%;
+  }
+}
+
+nz-header.app-header {
+  padding: 0;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+  height: 64px;
+  background: #fff;
+  padding: 0 1rem;
+  margin-bottom: 2px;
+
+  .header-trigger {
+    font-size: 20px;
+    cursor: pointer;
+    transition: all .3s,padding 0s;
+  }
+
+  .app-header-content{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    height: 63px;
+  }
+
+  .logo img {
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    vertical-align: middle;
+  }
+
+  .search{
+    min-width: 250px;
+    max-width: 400px;
+  }
+
+
+}
