@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pedacinhos-de-amor"
+    }
+  },
+  "defaultProject": "pedacinhos-de-amor",
+  "cli": {
+    "analytics": "22353a80-48ab-4cce-aa89-9f8183885c90"
+  }
 }
