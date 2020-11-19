@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { mockBanner } from '@app/core/models/banner-model';
+import { ProductModel, mockProduct } from '@app/core/models/product-model';
 
 @Component({
   selector: 'app-product',
@@ -11,6 +13,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductComponent implements OnInit {
+  @Input() product: ProductModel = mockProduct();
 
   constructor () { }
 

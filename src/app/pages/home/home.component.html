@@ -1,0 +1,18 @@
+<div class="home-container" nz-typography>
+    <div class="carousel-container">
+        <nz-carousel>
+            <!-- <nz-carousel nzAutoPlay> -->
+            <div nz-carousel-content *ngFor="let index of [1,2,3,4,5]">
+                <div class="margined-x">
+                    <app-banner></app-banner>
+                </div>
+            </div>
+        </nz-carousel>
+    </div>
+
+    <div class="content-sections flexed col center padded">
+        <section class="highlights content">
+            <h3>Em destaque</h3>
+        </section>
+    </div>
+</div>

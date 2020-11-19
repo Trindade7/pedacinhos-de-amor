@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { BannerModel, newBanner } from '@app/core/models/banner-model';
+import { BannerModel, mockBanner } from '@app/core/models/banner-model';
 
 @Component({
   selector: 'app-banner',
@@ -14,13 +14,7 @@ import { BannerModel, newBanner } from '@app/core/models/banner-model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BannerComponent implements OnInit {
-  @Input() banner: BannerModel = {
-    name: 'any name',
-    color: 'red',
-    imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
-    description: `Ad laborum tempor magna ut amet veniam officia
-    pariatur qui consectetur nostrud culpa non reprehenderit.`,
-  };
+  @Input() banner: BannerModel = mockBanner();
 
   constructor () { }
 

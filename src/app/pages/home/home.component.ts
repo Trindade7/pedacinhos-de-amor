@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  template: `
-    <app-banner></app-banner>
-  `,
+  templateUrl: 'home.component.html',
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {

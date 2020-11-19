@@ -79,40 +79,49 @@
 
       <div class="search flexed center">
         <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-          <input type="text" nz-input placeholder="input search text" />
+          <input type="text" nz-input class="search-input" placeholder="input search text" />
         </nz-input-group>
         <ng-template #suffixIconButton>
-          <button nz-button nzType="primary" nzSearch>
+          <button nz-button nzType="primary" nzSearch class="search-submit">
             <i nz-icon nzType="search"></i>
           </button>
         </ng-template>
       </div>
       <span class="spacer"></span>
 
-      <!-- <span class="header-trigger  padded-x" (click)="isCollapsed = !isCollapsed">
-        <i class="trigger"
-           nz-icon
-           [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-      </span> -->
+      <nz-space>
+        <nz-space-item>
+          <button nz-button nzType="primary" nzSize="medium" nzShape="circle">
+            <i class="trigger"
+               nz-icon
+               nzType="search"></i>
+          </button>
+        </nz-space-item>
 
-      <button (click)="isCollapsed = !isCollapsed" nz-button nzType="default" nzSize="large" nzShape="circle">
-        <i class="trigger"
-           nz-icon
-           [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-      </button>
+        <nz-space-item>
+          <button (click)="isCollapsed = !isCollapsed" nz-button nzType="default" nzSize="large" nzShape="circle">
+            <i class="trigger"
+               nz-icon
+               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+          </button>
+        </nz-space-item>
+      </nz-space>
     </div>
   </nz-header>
 
   <nz-layout>
 
-    <nz-layout class="inner-layout">
-      <router-outlet></router-outlet>
+    <nz-layout>
+      <div class="app-inner-layout">
+        <router-outlet></router-outlet>
+      </div>
     </nz-layout>
 
     <nz-sider nzWidth="300px"
               [nzCollapsedWidth]="0"
               [nzCollapsed]="isCollapsed"
-              nzTheme="light">
+              nzTheme="light"
+              [ngStyle]="{'overflow': 'hidden'}">
       <ul nz-menu nzMode="inline" class="sider-menu">
         <li nz-submenu nzOpen nzIcon="user" nzTitle="subnav 1">
           <ul>
