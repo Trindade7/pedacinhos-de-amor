@@ -17,7 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { pt_PT } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import pt from '@angular/common/locales/pt';
+// import pt from '@angular/common/locales/pt';
+import pt from '@angular/common/locales/pt-AO';
 
 registerLocaleData(pt);
 
@@ -31,21 +32,10 @@ registerLocaleData(pt);
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CoreModule,
     SharedModule,
-
-    AppRoutingModule,
-
-    IconsProviderModule,
-
-    NzLayoutModule,
-
-    NzMenuModule,
-
-    FormsModule,
-
+    BrowserAnimationsModule,
     HttpClientModule,
 
-    BrowserAnimationsModule,
-
+    AppRoutingModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: pt_PT }],
   bootstrap: [AppComponent]

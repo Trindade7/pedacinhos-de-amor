@@ -4,11 +4,7 @@ import { ProductModel, mockProduct } from '@app/core/models/product-model';
 
 @Component({
   selector: 'app-product',
-  template: `
-    <p>
-      product works!
-    </p>
-  `,
+  templateUrl: './product.component.html',
   styleUrls: ['./product.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

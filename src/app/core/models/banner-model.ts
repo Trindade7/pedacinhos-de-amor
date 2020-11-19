@@ -1,3 +1,5 @@
+import { randomColor } from './product-model';
+
 export interface BannerModel {
     name: string;
     description: string;
@@ -11,7 +13,7 @@ export function newBanner(banner: BannerModel): BannerModel {
 export function mockBanner(): BannerModel {
     return {
         name: 'any name',
-        color: 'red',
+        color: randomColor(),
         imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
         description: `Ad laborum tempor magna ut amet veniam officia
         pariatur qui consectetur nostrud culpa non reprehenderit.`,

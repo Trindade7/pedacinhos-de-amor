@@ -1,4 +1,4 @@
-<div class="home-container" nz-typography>
+<div class="home-container">
     <div class="carousel-container">
         <nz-carousel>
             <!-- <nz-carousel nzAutoPlay> -->
@@ -12,7 +12,23 @@
 
     <div class="content-sections flexed col center padded">
         <section class="highlights content">
-            <h3>Em destaque</h3>
+            <h3 nz-typography>Em destaque</h3>
+
+            <div class="product-list">
+                <app-product-horizontal-list></app-product-horizontal-list>
+            </div>
+        </section>
+    </div>
+    <div class="sized-box-4"></div>
+    <div class="sized-box-4"></div>
+    <div class="sized-box-4"></div>
+    <div class="content-sections flexed col center padded">
+        <section class="highlights content">
+            <h3 nz-typography>Em destaque</h3>
+
+            <div class="product-list">
+                <app-product></app-product>
+            </div>
         </section>
     </div>
 </div>

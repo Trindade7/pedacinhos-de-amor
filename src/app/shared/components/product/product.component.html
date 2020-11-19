@@ -1,0 +1,35 @@
+<div class="product">
+    <div class="image">
+        <img src="https://placehold.it/200x140?text=user%20avatar" alt="">
+    </div>
+
+    <div class="info padded-05-x">
+        <span nz-typography><strong>{{product.name}}</strong></span>
+        <div class="price">
+            <div nz-typography>
+                <nz-space [nzSize]="'middle'">
+                    <nz-space-item>
+                        <span nz-typography nzType="danger" nzDisabled>
+                            <del>{{product.price | currency: ' KZs '}}</del>
+                        </span>
+                    </nz-space-item>
+
+                    <nz-space-item>
+                        <h5 nz-typography nzType="danger">{{product.discaunt | currency: ' KZs '}}</h5>
+                    </nz-space-item>
+                </nz-space>
+            </div>
+
+            <h5 nz-typography nzType="danger" *ngIf="false">{{product.price | currency: ' KZs '}}</h5>
+        </div>
+        <div class="extras flexed">
+            <nz-rate [ngModel]="product.averageReview" nzAllowHalf nzDisabled></nz-rate>
+
+            <span class="spacer"></span>
+
+            <span class="total-comments">
+                <i nz-icon nzType="message"> </i> {{product.totalComments}}
+            </span>
+        </div>
+    </div>
+</div>
