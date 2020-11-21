@@ -72,7 +72,7 @@
   <nz-header class="app-header">
     <div class="content-container app-header-content">
       <div class="logo">
-        <img src="../assets/icons/logo.png" alt="">
+        <img src="../assets/icons/logo-darkest-full.png" alt="">
       </div>
 
       <span class="spacer"></span>
@@ -99,10 +99,10 @@
         </nz-space-item>
 
         <nz-space-item>
-          <button (click)="isCollapsed = !isCollapsed" nz-button nzType="default" nzSize="large" nzShape="circle">
+          <button (click)="toggleNavbar()" nz-button nzType="default" nzSize="large" nzShape="circle">
             <i class="trigger"
                nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+               [nzType]="showNavbar ? 'menu-unfold' : 'menu-fold'"></i>
           </button>
         </nz-space-item>
       </nz-space>
@@ -114,33 +114,59 @@
     <nz-layout>
       <div class="app-inner-layout">
         <router-outlet></router-outlet>
+
+        <footer class="app-footer">
+          <div class="content-container padded flexed center">
+            <div class="sized-box-2"></div>
+            <ul class="flexed">
+              <li>
+                <a class="flexed center" href="#">
+                  <span>Pedacinhosdeamor</span>
+                  <i class="trigger padded-05 icon" nz-icon nzType="facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a class="flexed center" href="#">
+                  <i class="trigger padded-05 icon" nz-icon nzType="instagram"></i>
+                  <span>Pedacinhosdeamor06</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </footer>
       </div>
     </nz-layout>
 
-    <nz-sider nzWidth="300px"
-              [nzCollapsedWidth]="0"
-              [nzCollapsed]="isCollapsed"
-              nzTheme="light"
-              [ngStyle]="{'overflow': 'hidden'}">
+    <nz-drawer [nzVisible]="showNavbar"
+               nzPlacement="right"
+               (nzOnClose)="toggleNavbar()">
+
+      <div class="padding-2-y">
+        <div class="logo">
+          <img src="../assets/icons/logo.png" alt="">
+        </div>
+      </div>
+
+      <div class="sized-box-2"></div>
+
       <ul nz-menu nzMode="inline" class="sider-menu">
-        <li nz-submenu nzOpen nzIcon="user" nzTitle="subnav 1">
-          <ul>
-            <li nz-menu-item nzSelected>option1</li>
-            <li nz-menu-item>option2</li>
-            <li nz-menu-item>option3</li>
-            <li nz-menu-item>option4</li>
-          </ul>
+        <li nz-menu-item nzSelected>Home</li>
+        <li nz-menu-item>Fale conosco</li>
+        <li nz-menu-item>Quem somos</li>
+      </ul>
+
+      <div class="sized-box-4"></div>
+
+      <ul nz-menu nzMode="inline" class="sider-menu">
+        <li nz-menu-item>
+          <i class="trigger" nz-icon nzType="instagram"></i>
+          Pedacinhosdeamor06
         </li>
-        <li nz-submenu nzTitle="subnav 3" nzIcon="notification">
-          <ul>
-            <li nz-menu-item>option9</li>
-            <li nz-menu-item>option10</li>
-            <li nz-menu-item>option11</li>
-            <li nz-menu-item>option12</li>
-          </ul>
+        <li nz-menu-item>
+          <i class="trigger" nz-icon nzType="facebook"></i>
+          <span>Pedacinhosdeamor</span>
         </li>
       </ul>
-    </nz-sider>
-
+    </nz-drawer>
   </nz-layout>
 </nz-layout>

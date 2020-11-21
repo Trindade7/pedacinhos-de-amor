@@ -19,7 +19,7 @@ import { pt_PT } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 // import pt from '@angular/common/locales/pt';
 import pt from '@angular/common/locales/pt-AO';
-
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 registerLocaleData(pt);
 
 @NgModule({
@@ -34,6 +34,7 @@ registerLocaleData(pt);
     SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NzDrawerModule,
 
     AppRoutingModule,
   ],

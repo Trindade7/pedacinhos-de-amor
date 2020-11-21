@@ -11,10 +11,13 @@ export function newBanner(banner: BannerModel): BannerModel {
 }
 
 export function mockBanner(): BannerModel {
+    const imageName = Math.floor(Math.random() * 3 + 1);
+    console.log(imageName);
+
     return {
         name: 'any name',
         color: randomColor(),
-        imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
+        imageUrl: `assets/images/${imageName}.jfif`,
         description: `Ad laborum tempor magna ut amet veniam officia
         pariatur qui consectetur nostrud culpa non reprehenderit.`,
     };

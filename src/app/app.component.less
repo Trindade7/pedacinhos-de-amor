@@ -5,12 +5,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app-container{
+.app-container {
   height: 100vh;
   width: 100vw;
 }
 
-.app-container{
+.app-container {
   height: 100vh;
   width: 100vw;
 
@@ -18,12 +18,12 @@
     position: relative;
     z-index: 10;
     min-height: 100%;
-    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+    box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
   }
 
-  .app-inner-layout{
+  .app-inner-layout {
     background: #fff;
-
+    overflow-x: hidden;
   }
 }
 
@@ -40,10 +40,10 @@ nz-header.app-header {
   .header-trigger {
     font-size: 20px;
     cursor: pointer;
-    transition: all .3s,padding 0s;
+    transition: all .3s, padding 0s;
   }
 
-  .app-header-content{
+  .app-header-content {
     display: flex;
     justify-items: center;
     align-items: center;
@@ -52,12 +52,11 @@ nz-header.app-header {
 
   .logo img {
     display: inline-block;
-    height: 32px;
-    width: 32px;
+    height: 48px;
     vertical-align: middle;
   }
 
-  .search{
+  .search {
     min-width: 250px;
     max-width: 400px;
     display: none;
@@ -66,8 +65,32 @@ nz-header.app-header {
       border-top-left-radius: 20px;
       border-bottom-left-radius: 20px;
     }
-    .search-submit{
+
+    .search-submit {
       border-radius: 0 50% 50% 0;
+    }
+  }
+}
+
+
+.app-footer {
+  min-height: 100px;
+  background-color: pink;
+
+  ul {
+    font-size: 1rem;
+    flex-wrap: wrap;
+    a {
+      color: black;
+
+      &:hover{
+        color: palevioletred;
+      }
+    }
+
+    i.icon {
+      font-size: 1.5rem;
+      margin-top: 5px;
     }
   }
 }

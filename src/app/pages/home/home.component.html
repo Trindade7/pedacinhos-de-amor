@@ -18,16 +18,57 @@
                 <app-product-horizontal-list></app-product-horizontal-list>
             </div>
         </section>
-    </div>
-    <div class="sized-box-4"></div>
-    <div class="sized-box-4"></div>
-    <div class="sized-box-4"></div>
-    <div class="content-sections flexed col center padded">
-        <section class="highlights content">
-            <h3 nz-typography>Em destaque</h3>
 
-            <div class="product-list">
-                <app-product></app-product>
+        <section class="events content">
+            <h3 nz-typography>Eventos especiais</h3>
+
+            <div class="events-list">
+                <div class="horizontal-list" nz-row [nzGutter]="0">
+                    <div class="item"
+                         *ngFor="let product of [1,2,3,4,5,6]"
+                         nz-col nzXs="12"
+                         nzSm="6"
+                         nzMd="8">
+                        <app-banner-simple></app-banner-simple>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div class="content-sections flexed col center padded">
+        <section nz-typography class="social-section content">
+            <h3>Redes sociais</h3>
+
+            <div class="socials flexed">
+                <div class="social-card facebook flexed padded">
+                    <div class="info">
+                        <h3>Facebook</h3>
+
+                        <p>
+                            Segue e mantem-te em contacto no facebook
+                        </p>
+                    </div>
+
+                    <div class="action">
+                        <button nz-button nzType="default" nzGhost>Ver página</button>
+                    </div>
+                </div>
+
+                <div class="social-card instagram flexed padded">
+                    <div class="info">
+                        <h3>Instagram</h3>
+
+                        <p>
+                            Acompanha a nossa galeria no instagram
+                        </p>
+                    </div>
+
+                    <div class="action">
+                        <button nz-button nzType="default" nzGhost>Ver página</button>
+                    </div>
+                </div>
             </div>
         </section>
     </div>

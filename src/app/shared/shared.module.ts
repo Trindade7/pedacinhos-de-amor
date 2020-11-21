@@ -17,9 +17,20 @@ import { IconsProviderModule } from '@app/icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { ProductHorizontalListComponent } from './components/product-horizontal-list/product-horizontal-list.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { BannerSimpleComponent } from './components/banner-simple/banner-simple.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { GridComponent } from './components/grid/grid.component';
+import { NzListModule } from 'ng-zorro-antd/list';
 
 @NgModule({
-  declarations: [BannerComponent, ProductComponent, ProductHorizontalListComponent],
+  declarations: [
+    BannerComponent,
+    ProductComponent,
+    ProductHorizontalListComponent,
+    BannerSimpleComponent,
+    GridComponent
+  ],
   imports: [
     CommonModule,
     NzTypographyModule,
@@ -27,7 +38,9 @@ import { ProductHorizontalListComponent } from './components/product-horizontal-
     FormsModule,
     NzSpaceModule,
     IconsProviderModule,
-    NzButtonModule
+    NzButtonModule,
+    NzGridModule,
+    NzCardModule
   ],
   exports: [
     // ant-design
@@ -37,21 +50,22 @@ import { ProductHorizontalListComponent } from './components/product-horizontal-
     NzSpaceModule,
     NzCarouselModule,
     NzRateModule,
+    NzGridModule,
+    NzListModule,
     // ant-design end
 
     // ##### ANTD ADDED
     IconsProviderModule,
-
     NzLayoutModule,
-
     NzMenuModule,
-
     FormsModule,
     // #####
 
     BannerComponent,
     ProductComponent,
     ProductHorizontalListComponent,
+    BannerSimpleComponent,
+    GridComponent,
   ]
 })
 export class SharedModule { }

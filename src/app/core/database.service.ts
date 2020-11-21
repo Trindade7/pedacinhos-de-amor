@@ -148,6 +148,7 @@ export class DatabaseService<T> {
     ).toPromise();
   }
 
+
   create(document: T, docId: string): Promise<void> {
     logger.startCollapsed(
       `[firestore.service] [create()]`,

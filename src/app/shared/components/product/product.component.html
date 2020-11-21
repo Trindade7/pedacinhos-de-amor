@@ -15,12 +15,16 @@
                     </nz-space-item>
 
                     <nz-space-item>
-                        <h5 nz-typography nzType="danger">{{product.discaunt | currency: ' KZs '}}</h5>
+                        <span nz-typography nzType="danger">
+                            <strong>{{product.discaunt | currency: ' KZs '}}</strong>
+                        </span>
                     </nz-space-item>
                 </nz-space>
             </div>
 
-            <h5 nz-typography nzType="danger" *ngIf="false">{{product.price | currency: ' KZs '}}</h5>
+            <span *ngIf="false" nz-typography nzType="danger">
+                <strong>{{product.discaunt | currency: ' KZs '}}</strong>
+            </span>
         </div>
         <div class="extras flexed">
             <nz-rate [ngModel]="product.averageReview" nzAllowHalf nzDisabled></nz-rate>
