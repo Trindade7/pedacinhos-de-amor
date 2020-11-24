@@ -2,6 +2,7 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "baseUrl": "./",
+    "rootDir": "./",
     "paths": {
       "@app/*": ["src/app/*"],
       "@app-assets/*": ["src/assets/*"],
@@ -20,6 +21,32 @@
     "target": "es2015",
     "module": "es2020",
     "lib": ["es2018", "dom"]
-  }
-  // "include": ["src/**/*.ts", "test/**/*.ts"]
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "exclude": ["src/**/*.html", "test/**/*.htm"],
+  "overrides": [
+    /**
+     * -----------------------------------------------------
+     * TYPESCRIPT FILES (COMPONENTS, SERVICES ETC) (.ts)
+     * -----------------------------------------------------
+     */
+    {
+      "files": ["*.ts"],
+
+      // ... applies a special processor to extract inline Component templates
+      // and treat them like HTML files
+      "extends": ["plugin:@angular-eslint/template/process-inline-templates"]
+
+      // ... other config specific to TypeScript files
+    },
+    /**
+     * -----------------------------------------------------
+     * COMPONENT TEMPLATES
+     * -----------------------------------------------------
+     */
+    {
+      "files": ["*.html"]
+      // ... config specific to Angular Component templates
+    }
+  ]
 }

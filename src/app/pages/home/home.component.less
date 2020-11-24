@@ -39,54 +39,14 @@
             }
         }
 
-        &:before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            z-index: -1;
-            background-image: url('assets/icons/logo.png');
-        }
-
-        &:after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            z-index: -1;
-        }
-
         &.facebook {
             flex: 1;
-
-            &:after {
-                background: hsla(217, 94%, 20%, 1);
-
-                background: linear-gradient(90deg, hsla(217, 94%, 20%, 1) 8%, hsla(217, 96%, 41%, 1) 29%, hsla(217, 84%, 60%, 0.3) 60%, hsla(186, 100%, 69%, 0) 87%);
-
-                background: -moz-linear-gradient(90deg, hsla(217, 94%, 20%, 1) 8%, hsla(217, 96%, 41%, 1) 29%, hsla(217, 84%, 60%, 0.3) 60%, hsla(186, 100%, 69%, 0) 87%);
-
-                background: -webkit-linear-gradient(90deg, hsla(217, 94%, 20%, 1) 8%, hsla(217, 96%, 41%, 1) 29%, hsla(217, 84%, 60%, 0.3) 60%, hsla(186, 100%, 69%, 0) 87%);
-            }
+            background:linear-gradient(90deg, #1f3c93 6%,#1e4999 32%,#4787ff 75% );
         }
 
         &.instagram {
             flex: 1;
-
-            &:after {
-                background: hsla(338, 82%, 46%, 1);
-
-                background: linear-gradient(90deg, hsla(338, 82%, 46%, 1) 8%, hsla(311, 96%, 41%, 1) 29%, hsla(284, 85%, 60%, 0.3) 60%, hsla(186, 100%, 69%, 0) 87%);
-
-                background: -moz-linear-gradient(90deg, hsla(338, 82%, 46%, 1) 8%, hsla(311, 96%, 41%, 1) 29%, hsla(284, 85%, 60%, 0.3) 60%, hsla(186, 100%, 69%, 0) 87%);
-
-                background: -webkit-linear-gradient(90deg, hsla(338, 82%, 46%, 1) 8%, hsla(311, 96%, 41%, 1) 29%, hsla(284, 85%, 60%, 0.3) 60%, hsla(186, 100%, 69%, 0) 87%);
-
-            }
+            background: hsla(338, 82%, 46%, 1);
         }
     }
 }

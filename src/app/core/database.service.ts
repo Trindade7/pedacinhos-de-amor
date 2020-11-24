@@ -34,11 +34,7 @@ export class DatabaseService<T> {
   constructor (
     @Inject(AngularFirestore) private _firestore: AngularFirestore,
   ) { }
-  private _collection(
-    path: string = this.basePath,
-    orderBy?: string,
-    orderDirection?: 'asc' | 'desc'
-  ): AngularFirestoreCollection<T> {
+  private _collection(path: string = this.basePath): AngularFirestoreCollection<T> {
     return this._firestore.collection(path);
     // return this.firestore.collection(path, ref => ref.orderBy(orderBy, orderDirection));
   }

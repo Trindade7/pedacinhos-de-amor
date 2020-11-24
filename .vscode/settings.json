@@ -1,4 +1,16 @@
 {
+  "eslint.options": {
+    "extensions": [".ts", ".html"]
+  },
+
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html"
+  ],
+
   "peacock.color": "#FF6E6Eb2",
   "notebook.kernelProviderAssociations": [],
   "workbench.colorCustomizations": {
