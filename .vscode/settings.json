@@ -1,0 +1,33 @@
+{
+  "eslint.options": {
+    "extensions": [".ts", ".html"]
+  },
+
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html"
+  ],
+
+  "peacock.color": "#FF6E6Eb2",
+  "notebook.kernelProviderAssociations": [],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#ffa1a1b2",
+    "activityBar.activeBorder": "#008000",
+    "activityBar.background": "#ffa1a1b2",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#008000",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "editorGroup.border": "#ffa1a1b2",
+    "panel.border": "#ffa1a1b2",
+    "sideBar.border": "#ffa1a1b2",
+    "statusBar.background": "#ff6e6eb2",
+    "statusBar.border": "#ff6e6eb2",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#ff3b3bb2",
+    "tab.activeBorder": "#ffa1a1b2"
+  }
+}

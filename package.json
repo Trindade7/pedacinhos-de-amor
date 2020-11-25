@@ -26,10 +26,11 @@
     "@angular/platform-browser": "~11.0.0",
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
+    "firebase": "^7.0.0 || ^8.0.0",
+    "ng-zorro-antd": "^10.1.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2",
-    "firebase": "^7.0.0 || ^8.0.0"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.1",
@@ -56,6 +57,17 @@
     "fuzzy": "^0.1.3",
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",
-    "open": "^7.0.3"
+    "open": "^7.0.3",
+    "eslint": "^7.6.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsdoc": "30.7.6",
+    "eslint-plugin-prefer-arrow": "1.2.2",
+    "@angular-eslint/builder": "0.8.0-beta.2",
+    "@angular-eslint/eslint-plugin": "0.8.0-beta.2",
+    "@angular-eslint/eslint-plugin-template": "0.8.0-beta.2",
+    "@angular-eslint/schematics": "^0.8.0-beta.2",
+    "@angular-eslint/template-parser": "0.8.0-beta.2",
+    "@typescript-eslint/eslint-plugin": "4.3.0",
+    "@typescript-eslint/parser": "4.3.0"
   }
 }

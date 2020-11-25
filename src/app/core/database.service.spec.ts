@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { DatabaseService } from './database.service';
 
 describe('DatabaseService', () => {
-  let service: DatabaseService;
+  let service: DatabaseService<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

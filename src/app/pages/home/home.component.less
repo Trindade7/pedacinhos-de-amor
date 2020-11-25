@@ -1,0 +1,58 @@
+.home-container {
+    padding: 2rem 0;
+
+    .carousel-container {
+        max-height: 300px;
+        overflow-y: hidden;
+    }
+
+    .content-sections {
+        width: 100%;
+    }
+
+    .content {
+        margin: 1rem 0;
+        width: 100%;
+        max-width: 1000px;
+    }
+}
+
+.social-section {
+    .socials{
+        flex-direction: column;
+    }
+    .social-card {
+        background: transparent;
+        position: relative;
+        z-index: 2;
+        color: white;
+        min-height: 150px;
+        align-items: end;
+        align-items: flex-end;
+
+        .info{
+            color: white;
+            flex: auto;
+
+            h3{
+                color: white;
+            }
+        }
+
+        &.facebook {
+            flex: 1;
+            background:linear-gradient(90deg, #1e4999 0%,#4787ff 90% );
+        }
+
+        &.instagram {
+            flex: 1;
+            background:linear-gradient(90deg, #7c1b35 0%,hsla(338, 82%, 46%, 1) 90% );
+        }
+    }
+}
+
+@media only screen and (min-width: 576px){
+    .social-section .socials{
+        flex-direction: row;
+    }
+}

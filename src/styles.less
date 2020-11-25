@@ -1,0 +1,155 @@
+/* You can add global styles to this file, and also import other style files */
+ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+
+// *################### CONTAINERS
+.content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.flexed {
+  display: flex;
+
+  &.col {
+    flex-direction: column;
+  }
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
+  &.center-y {
+    align-items: center;
+    // align-content: center;
+    // justify-content: center;
+  }
+  &.center-x {
+    justify-content: center;
+  }
+}
+
+// *################### PADDINGS AND MARGINS
+.padded {
+  padding: 1rem;
+
+  &-y {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  &-x {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  &-05 {
+    padding: 0.5rem;
+    &-y {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    &-x {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  &-2 {
+    padding: 2rem;
+    &-y {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    &-x {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}
+.margined {
+  margin: 1rem;
+
+  &-y {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  &-x {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  &-05 {
+    margin: 0.5rem;
+    &-y {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    &-x {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  &-2 {
+    margin: 2rem;
+    &-y {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    &-x {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+  }
+}
+
+// *################### SIMPLE COMPONENTS
+.sized-box {
+    width: 1rem;
+    height: 1rem;
+
+    &-05 {
+      width: 1rem * 0.5;
+      height: 1rem * 0.5;
+    }
+
+    &-15 {
+      width: 1rem * 1.5;
+      height: 1rem * 1.5;
+    }
+
+    &-2 {
+      width: 1rem * 2;
+      height: 1rem * 2;
+    }
+
+    &-3 {
+      width: 1rem * 3;
+      height: 1rem * 3;
+    }
+
+    &-4 {
+      width: 1rem * 4;
+      height: 1rem * 4;
+    }
+  }
+
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .shadowed {
+    box-shadow: 0px 2px 4px -1px rgba(146, 45, 185, 0.2),
+      0px 4px 5px 0px rgba(146, 45, 185, 0.14),
+      0px 1px 10px 0px rgba(146, 45, 185, 0.12);
+
+    &-8 {
+      box-shadow: 0px 5px 5px -3px rgba(146, 45, 185, 0.2),
+        0px 8px 10px 1px rgba(146, 45, 185, 0.14),
+        0px 3px 14px 2px rgba(146, 45, 185, 0.12);
+    }
+  }
