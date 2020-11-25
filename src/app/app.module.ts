@@ -20,12 +20,14 @@ import { registerLocaleData } from '@angular/common';
 // import pt from '@angular/common/locales/pt';
 import pt from '@angular/common/locales/pt-AO';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 registerLocaleData(pt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

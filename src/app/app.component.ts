@@ -11,4 +11,6 @@ export class AppComponent {
   toggleNavbar() {
     this.showNavbar = !this.showNavbar;
   }
+
+
 }

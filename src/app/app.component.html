@@ -72,7 +72,7 @@
   <nz-header class="app-header">
     <div class="content-container app-header-content">
       <div class="logo">
-        <img src="../assets/icons/logo-darkest-full.png" alt="">
+        <img routerLink="/home" src="../assets/icons/logo-darkest-full.png" alt="">
       </div>
 
       <span class="spacer"></span>
@@ -90,22 +90,22 @@
       <span class="spacer"></span>
 
       <nz-space>
-        <nz-space-item>
-          <button nz-button nzType="primary" nzSize="medium" nzShape="circle">
-            <i class="trigger"
-               nz-icon
-               nzType="search"></i>
-          </button>
-        </nz-space-item>
+        <!-- <div class="flexed center padded-05-x ">
+          <input class="search-input" nz-input placeholder="Procurar..." />
+        </div> -->
 
         <nz-space-item>
-          <button (click)="toggleNavbar()" nz-button nzType="default" nzSize="large" nzShape="circle">
-            <i class="trigger"
-               nz-icon
-               [nzType]="showNavbar ? 'menu-unfold' : 'menu-fold'"></i>
+          <button nz-button nzType="primary" nzSize="medium" nzShape="circle">
+            <i class="trigger" nz-icon nzType="shopping" nzTheme="outline"></i>
           </button>
         </nz-space-item>
       </nz-space>
+
+      <button (click)="toggleNavbar()" nz-button nzType="default" nzSize="large" nzShape="circle">
+        <i class="trigger"
+           nz-icon
+           [nzType]="showNavbar ? 'menu-unfold' : 'menu-fold'"></i>
+      </button>
     </div>
   </nz-header>
 
@@ -115,23 +115,84 @@
       <div class="app-inner-layout">
         <router-outlet></router-outlet>
 
-        <footer class="app-footer">
-          <div class="content-container padded flexed center">
-            <div class="sized-box-2"></div>
-            <ul class="flexed">
+        <footer class="app-footer" nz-typography>
+          <div class="content-container padded flexed">
+
+            <ul class="contact-list">
+              <h3>Nas redes sociais</h3>
+
               <li>
-                <a class="flexed center" href="#">
+                <a class="flexed center-y" href="#">
+                  <i class="trigger icon" nz-icon nzType="facebook"></i>
                   <span>Pedacinhosdeamor</span>
-                  <i class="trigger padded-05 icon" nz-icon nzType="facebook"></i>
                 </a>
               </li>
               <li>
-                <a class="flexed center" href="#">
-                  <i class="trigger padded-05 icon" nz-icon nzType="instagram"></i>
+                <a class="flexed center-y" href="https://www.instagram.com/pedacinhosdeamor06">
+                  <i class="trigger icon" nz-icon nzType="instagram"></i>
                   <span>Pedacinhosdeamor06</span>
                 </a>
               </li>
             </ul>
+
+            <ul class="contact-list">
+              <h3>Contactos</h3>
+
+              <li>
+                <a class="flexed center-y" href="tel:923049043">
+                  <i class="trigger icon" nz-icon nzType="phone"></i>
+                  <span>923 049 043</span>
+                </a>
+              </li>
+              <li>
+                <a class="flexed center-y" href="https://wa.link/nfljve">
+                  <i class="trigger icon" nz-icon nzType="whats-app"></i>
+                  <span>923 049 043</span>
+                </a>
+              </li>
+              <li>
+                <a class="flexed center-y" href="mailto:pedacinhosdeamor06@gmail.com">
+                  <i class="trigger icon" nz-icon nzType="mail"></i>
+                  <span>pedacinhosdeamor06@gmail.com</span>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="contact-list">
+              <h3>Parceiros</h3>
+
+              <li>
+                <a class="flexed center-y" href="#">
+                  <!-- <i class="trigger icon" nz-icon nzType="whatsapp"></i> -->
+                  <span>Salgadinhos da Maria</span>
+                </a>
+              </li>
+              <li>
+                <a class="flexed center-y" href="#">
+                  <!-- <i class="trigger icon" nz-icon nzType="whatsapp"></i> -->
+                  <span>Moda Auria</span>
+                </a>
+              </li>
+              <li>
+                <a class="flexed center-y" href="#">
+                  <!-- <i class="trigger icon" nz-icon nzType="whatsapp"></i> -->
+                  <span>Molhos da Ana</span>
+                </a>
+              </li>
+              <li>
+                <a class="flexed center-y" href="#">
+                  <!-- <i class="trigger icon" nz-icon nzType="mail"></i> -->
+                  <span>Especiarias Trindade</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="developer">
+            <div class="content-container padded-05 flexed center">
+              <span>Criado por:</span>
+              <a class="padded-05-x" href="https://github.com/Trindade7"> José Trindade</a>
+            </div>
           </div>
         </footer>
       </div>
@@ -149,10 +210,9 @@
 
       <div class="sized-box-2"></div>
 
-      <ul nz-menu nzMode="inline" class="sider-menu">
+      <ul class="contact-list" nz-menu nzMode="inline" class="sider-menu">
         <li nz-menu-item nzSelected>Home</li>
         <li nz-menu-item>Fale conosco</li>
-        <li nz-menu-item>Quem somos</li>
       </ul>
 
       <div class="sized-box-4"></div>
@@ -165,6 +225,10 @@
         <li nz-menu-item>
           <i class="trigger" nz-icon nzType="facebook"></i>
           <span>Pedacinhosdeamor</span>
+        </li>
+        <li nz-menu-item>
+          <i class="trigger" nz-icon nzType="whats-app"></i>
+          <span>923 049 043</span>
         </li>
       </ul>
     </nz-drawer>
