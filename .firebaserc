@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "pedacinhos-de-amor": {
+      "hosting": {
+        "pedacinhos-de-amor": [
+          "pedacinhos-de-amor"
+        ]
+      }
+    }
+  }
+}

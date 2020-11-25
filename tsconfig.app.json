@@ -3,13 +3,19 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    // "types": ["node"],
+    // "target": "es6",
+    "baseUrl": "./src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@app-assets/*": ["assets/*"],
+      "@app-envs/*": ["environments/*"],
+      "@app-core/*": ["app/core/*"],
+      "@app-shared/*": ["app/shared/*"],
+      "@app-modules/*": ["app/modules/*"]
+    }
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.d.ts"]
 }
