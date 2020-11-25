@@ -90,6 +90,11 @@
       <span class="spacer"></span>
 
       <nz-space>
+        <!-- <input nz-input placeholder="Basic usage" [(ngModel)]="value" /> -->
+        <div class="flexed center padded-05-x ">
+          <input class="search-input" nz-input placeholder="Procurar..." />
+        </div>
+
         <nz-space-item>
           <button nz-button nzType="primary" nzSize="medium" nzShape="circle">
             <i class="trigger"
@@ -97,15 +102,13 @@
                nzType="search"></i>
           </button>
         </nz-space-item>
-
-        <nz-space-item>
-          <button (click)="toggleNavbar()" nz-button nzType="default" nzSize="large" nzShape="circle">
-            <i class="trigger"
-               nz-icon
-               [nzType]="showNavbar ? 'menu-unfold' : 'menu-fold'"></i>
-          </button>
-        </nz-space-item>
       </nz-space>
+
+      <button (click)="toggleNavbar()" nz-button nzType="default" nzSize="large" nzShape="circle">
+        <i class="trigger"
+           nz-icon
+           [nzType]="showNavbar ? 'menu-unfold' : 'menu-fold'"></i>
+      </button>
     </div>
   </nz-header>
 
@@ -128,7 +131,7 @@
                 </a>
               </li>
               <li>
-                <a class="flexed center-y" href="#">
+                <a class="flexed center-y" href="https://www.instagram.com/pedacinhosdeamor06">
                   <i class="trigger icon" nz-icon nzType="instagram"></i>
                   <span>Pedacinhosdeamor06</span>
                 </a>
@@ -213,7 +216,6 @@
       <ul class="contact-list" nz-menu nzMode="inline" class="sider-menu">
         <li nz-menu-item nzSelected>Home</li>
         <li nz-menu-item>Fale conosco</li>
-        <li nz-menu-item>Quem somos</li>
       </ul>
 
       <div class="sized-box-4"></div>
