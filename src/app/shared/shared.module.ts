@@ -22,6 +22,7 @@ import { BannerSimpleComponent } from './components/banner-simple/banner-simple.
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { GridComponent } from './components/grid/grid.component';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
     NzRateModule,
     NzGridModule,
     NzListModule,
+    NzResultModule,
     // ant-design end
 
     // ##### ANTD ADDED

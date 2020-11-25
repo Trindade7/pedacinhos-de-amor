@@ -8,11 +8,6 @@
 .app-container {
   height: 100vh;
   width: 100vw;
-}
-
-.app-container {
-  height: 100vh;
-  width: 100vw;
 
   .menu-sidebar {
     position: relative;
@@ -22,7 +17,7 @@
   }
 
   .app-inner-layout {
-    background: #fff;
+    // background: #fff;
     overflow-x: hidden;
   }
 }
@@ -54,6 +49,12 @@ nz-header.app-header {
     display: inline-block;
     height: 48px;
     vertical-align: middle;
+    cursor: pointer;
+    transition: transform 300ms;
+
+    &:hover{
+      transform: scale(.9);
+    }
   }
 
   .search {
@@ -72,18 +73,27 @@ nz-header.app-header {
   }
 }
 
-
 .app-footer {
   min-height: 100px;
   background-color: pink;
 
-  ul {
-    font-size: 1rem;
+  .content-container {
     flex-wrap: wrap;
+  }
+
+  ul.contact-list {
+    font-size: 1rem;
+    list-style: none;
+    flex: 1;
+
+    li {
+      margin-left: .5rem;
+    }
+
     a {
       color: black;
 
-      &:hover{
+      &:hover {
         color: palevioletred;
       }
     }
@@ -91,6 +101,16 @@ nz-header.app-header {
     i.icon {
       font-size: 1.5rem;
       margin-top: 5px;
+      padding-right: .5rem;
+    }
+  }
+
+  .developer {
+    background-color: rgb(66, 31, 56);
+    color: white;
+
+    a {
+      // color: white;
     }
   }
 }
