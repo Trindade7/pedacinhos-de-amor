@@ -23,6 +23,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { GridComponent } from './components/grid/grid.component';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     IconsProviderModule,
     NzButtonModule,
     NzGridModule,
-    NzCardModule
+    NzCardModule,
+    AppRoutingModule
   ],
   exports: [
     // ant-design
@@ -54,6 +57,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzGridModule,
     NzListModule,
     NzResultModule,
+    NzInputNumberModule,
     // ant-design end
 
     // ##### ANTD ADDED

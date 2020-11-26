@@ -21,13 +21,15 @@ import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt-AO';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 registerLocaleData(pt);
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

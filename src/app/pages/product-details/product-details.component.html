@@ -1,0 +1,71 @@
+<div class="content-container" nzTypography>
+    <div class="ads-bar-container padded-y">
+        <img src="https://placehold.it/1000x150?text=user%20avatar" alt="">
+    </div>
+
+    <div *ngIf="productOrder.product as product">
+        <div class="product-container flexed center-x wrap">
+            <div class="image">
+                <img class="padded-05" src="https://placehold.it/400x400?text=user%20avatar" alt="">
+                <!-- <img [src]="product.imageUrl" alt=""> -->
+            </div>
+
+            <section class="details padded-x">
+                <h1 nzTypography class="name">{{product.name}}</h1>
+
+                <div class="rating">
+                    <nz-rate [ngModel]="product.averageReview" nzAllowHalf nzDisabled></nz-rate>
+                </div>
+
+                <p class="description">
+                    {{product.description}}
+                </p>
+
+                <div class="order-summary">
+                    <div class="options flexed">
+                        <section class="quantity">
+                            <label for="quantity">
+                                <h3>Quantidade</h3>
+                            </label>
+                            <nz-input-number id="quantity"
+                                             [(ngModel)]="productOrder.quantity"
+                                             [nzMin]="1"
+                                             [nzMax]="50"
+                                             [nzStep]="1"></nz-input-number>
+                        </section>
+
+                        <div class="sized-box"></div>
+
+                        <section class="price">
+                            <h3>Preço</h3>
+                            <h2>{{product.price * productOrder.quantity | currency: 'Kzs '}}</h2>
+                        </section>
+                    </div>
+                    <div class="sized-box"></div>
+                    <div class="flexed">
+                        <button nz-button nzType="primary">Adicionar ao cesto</button>
+                        <div class="sized-box"></div>
+                        <button nz-button nzType="accent">personalizar</button>
+                        <span class="spacer"></span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="extras">
+
+
+            <nz-input-group [nzSuffix]="textAreaClearTpl" class="ant-input-affix-wrapper-textarea-with-clear-btn">
+                <textarea nz-input [(ngModel)]="productOrder.details" placeholder="textarea with clear icon"></textarea>
+            </nz-input-group>
+
+            <ng-template #textAreaClearTpl><i
+                   nz-icon
+                   class="ant-input-textarea-clear-icon"
+                   nzTheme="fill"
+                   nzType="close-circle"
+                   *ngIf="productOrder.details"
+                   (click)="textValue = null"></i></ng-template>
+        </div>
+    </div>
+</div>
