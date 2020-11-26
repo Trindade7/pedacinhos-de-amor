@@ -58,6 +58,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzListModule,
     NzResultModule,
     NzInputNumberModule,
+    NzCardModule,
     // ant-design end
 
     // ##### ANTD ADDED

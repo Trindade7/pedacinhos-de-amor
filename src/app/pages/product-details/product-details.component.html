@@ -52,20 +52,29 @@
             </section>
         </div>
 
-        <div class="extras">
+        <div class="sized-box-2"></div>
 
+        <div class="extras flexed wrap padded-05">
+            <nz-card class="container comments" nzTitle="Comentários">
+                <div class="flexed center">
+                    <h2>Opções de commmentários em breve</h2>
+                </div>
+            </nz-card>
 
-            <nz-input-group [nzSuffix]="textAreaClearTpl" class="ant-input-affix-wrapper-textarea-with-clear-btn">
-                <textarea nz-input [(ngModel)]="productOrder.details" placeholder="textarea with clear icon"></textarea>
-            </nz-input-group>
+            <nz-card class="container order-options" nzTitle="Mais opções">
+                <div class="order-details">
+                    <textarea nz-input
+                              placeholder="Pedido personalizado? Escreva o que deseja aqui..."
+                              [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
 
-            <ng-template #textAreaClearTpl><i
-                   nz-icon
-                   class="ant-input-textarea-clear-icon"
-                   nzTheme="fill"
-                   nzType="close-circle"
-                   *ngIf="productOrder.details"
-                   (click)="textValue = null"></i></ng-template>
+                    <div class="sized-box"></div>
+
+                    <div class="flexed">
+                        <span class="spacer"></span>
+                        <button nz-button nzType="primary">Adicionar ao cesto</button>
+                    </div>
+                </div>
+            </nz-card>
         </div>
     </div>
 </div>

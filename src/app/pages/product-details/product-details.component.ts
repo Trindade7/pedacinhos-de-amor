@@ -13,7 +13,7 @@ export class ProductDetailsComponent implements OnInit {
   productOrder: ProductOrderModel<ProductModel> = {
     product: mockProduct(),
     details: '',
-    quantity: 0
+    quantity: 1
   };
 
   constructor (
