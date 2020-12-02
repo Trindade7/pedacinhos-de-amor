@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { BannerModel, mockBanner } from '@app/core/models/banner-model';
+import { BannerModel, BannerSimpleModel, mockBanner } from '@app/core/models/banner-model';
+
 
 @Component({
   selector: 'app-banner-simple',
@@ -8,13 +9,14 @@ import { BannerModel, mockBanner } from '@app/core/models/banner-model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BannerSimpleComponent implements OnInit {
-  @Input() banner: BannerModel = mockBanner();
+  @Input() bannerData: BannerSimpleModel = mockBanner();
   @Input() roundCorners = false;
   @Input() shadowedOnHover = true;
 
   constructor () { }
 
   ngOnInit(): void {
+    console.log('Banner data\n', this.bannerData, '\n');
   }
 
 }

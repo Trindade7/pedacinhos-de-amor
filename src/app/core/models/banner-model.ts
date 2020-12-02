@@ -1,18 +1,20 @@
 import { randomColor } from './product-model';
 
-export interface BannerModel {
+export interface BannerSimpleModel {
     name: string;
-    description: string;
     imageUrl: string;
     color: string;
 }
+export interface BannerModel extends BannerSimpleModel {
+    description: string;
+}
+
 export function newBanner(banner: BannerModel): BannerModel {
     return banner;
 }
 
 export function mockBanner(): BannerModel {
     const imageName = Math.floor(Math.random() * 3 + 1);
-    console.log(imageName);
 
     return {
         name: 'any name',
