@@ -14,7 +14,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { NzI18nService, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { pt_PT } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 // import pt from '@angular/common/locales/pt';
@@ -22,6 +22,7 @@ import pt from '@angular/common/locales/pt-AO';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { ProductsComponent } from './pages/products/products.component';
 registerLocaleData(pt);
 
 @NgModule({
@@ -29,7 +30,8 @@ registerLocaleData(pt);
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,4 +47,5 @@ registerLocaleData(pt);
   providers: [{ provide: NZ_I18N, useValue: pt_PT }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

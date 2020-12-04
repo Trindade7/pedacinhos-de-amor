@@ -7,3 +7,12 @@
         <app-product></app-product>
     </div>
 </div>
+<div class="horizontal-list" nz-row [nzGutter]="16">
+    <div class="item"
+         *ngFor="let product of products"
+         nz-col nzXs="12"
+         nzSm="8"
+         nzMd="6">
+        <app-product></app-product>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 <div class="product">
     <div class="image">
         <a routerLink="/products/any">
-            <img src="https://placehold.it/200x140?text=user%20avatar" alt="">
+            <img [src]="product.imageUrl" [alt]="product.name">
         </a>
     </div>
 
@@ -18,14 +18,14 @@
 
                     <nz-space-item>
                         <span nz-typography nzType="danger">
-                            <strong>{{product.discaunt | currency: ' KZs '}}</strong>
+                            <strong>{{product.discount | currency: ' KZs '}}</strong>
                         </span>
                     </nz-space-item>
                 </nz-space>
             </div>
 
             <span *ngIf="false" nz-typography nzType="danger">
-                <strong>{{product.discaunt | currency: ' KZs '}}</strong>
+                <strong>{{product.discount | currency: ' KZs '}}</strong>
             </span>
         </div>
         <div class="extras flexed">

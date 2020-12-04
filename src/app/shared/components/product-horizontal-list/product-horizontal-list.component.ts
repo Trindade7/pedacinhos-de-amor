@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ProductModel } from '@app/core/models/product-model';
 
 @Component({
   selector: 'app-product-horizontal-list',
@@ -7,8 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductHorizontalListComponent implements OnInit {
+  @Input() products: ProductModel[] = [];
 
-  constructor() { }
+  constructor () { }
 
   ngOnInit(): void {
   }

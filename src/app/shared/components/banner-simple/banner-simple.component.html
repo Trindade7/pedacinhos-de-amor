@@ -1,6 +1,10 @@
 <div class="banner-container"
      [ngClass]="{'round-corners': roundCorners, 'shadowed-on-hover': shadowedOnHover}"
-     [ngStyle]="{'background-image': 'url(' + bannerData.imageUrl + ')', 'background-color': bannerData.color}">
+     [ngStyle]="{
+         'background-image': 'url(' + bannerData.imageUrl + ')',
+         'background-color': bannerData.color,
+         'background-position': backgroundPosition
+        }">
     <title>{{bannerData.name}} </title>
     <h3 nz-typography class="name">{{bannerData.name}}</h3>
 </div>

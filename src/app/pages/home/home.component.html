@@ -19,6 +19,14 @@
             </div>
         </section>
 
+        <section class="highlights content">
+            <h3 nz-typography>Em foco</h3>
+
+            <div class="product-list" *ngIf="homeSvc.loading$ |async">
+                <app-product-horizontal-list [products]="homeSvc.products | async"></app-product-horizontal-list>
+            </div>
+        </section>
+
         <section class="events content">
             <header nz-typography>
                 <h3>Eventos especiais</h3>
@@ -31,7 +39,7 @@
             <div class="events-list">
                 <div class="horizontal-list" nz-row [nzGutter]="0">
                     <div class="item"
-                         *ngFor="let event of events"
+                         *ngFor="let event of homeSvc.events"
                          nz-col nzXs="12"
                          nzSm="8">
                         <app-banner-simple [bannerData]="event"></app-banner-simple>

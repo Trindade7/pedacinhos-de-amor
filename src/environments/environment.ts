@@ -9,6 +9,7 @@ export const environment = {
     apiKey: "AIzaSyD0CKxdHHEB6Xt_ttBLMin5vcmA8mSTnjk",
     authDomain: "pedacinhos-de-amor.firebaseapp.com",
     databaseURL: "https://pedacinhos-de-amor.firebaseio.com",
+    // databaseURL: "localhost:4000/firestore",
     projectId: "pedacinhos-de-amor",
     storageBucket: "pedacinhos-de-amor.appspot.com",
     messagingSenderId: "806226835265",
@@ -24,4 +25,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error';  // Included with Angular CLI.

@@ -1,7 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule } from '@angular/fire/firestore';
-import firebase from 'firebase';
-import { Observable } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Logger as logger } from '@app-core/logger';
 
@@ -45,7 +44,7 @@ export class DatabaseService<T> {
 
   get getServerTimeStamp(): any {
     // return firebase.firestore.FieldValue.serverTimestamp();
-    return firebase.firestore.FieldValue.serverTimestamp();
+    return '';
   }
 
   createId(): string {
@@ -103,26 +102,33 @@ export class DatabaseService<T> {
     );
   }
 
-  doc$(id: string): Observable<T | null> {
-    logger.startCollapsed(
-      `[firestore.service] [doc$()]`,
-      [{ log: ['id:', id], type: 'warn' }]
-    );
+  /**
+   *
+   * Returns a collection snapshot.
+   *
+   */
+  collection(queryOptions: Partial<QueryOptions> = this._defaultQuery): Promise<T[]> {
+    logger.collapsed('[firestore.service] collection$', [queryOptions]);
 
-    const path = `${this.basePath}/${id}`;
+    const opts: QueryOptions = Object.assign(this._defaultQuery, queryOptions);
 
-    return this._firestore.doc<T>(path).valueChanges()
-      .pipe(tap( // LOGGING DATA
-        val => logger.endCollapsed([`RESPONSE streaming from [${path}]`, val]),
-        err => logger.endCollapsed([`ERROR streaming from [${path}] `, err]),
-      ),
-        map(docOrUndefined => docOrUndefined ?? null)
-      );
+    return this._firestore.collection<T>(
+      opts.path ?? this.basePath,
+      ref => {
+        let query = ref.orderBy(opts.orderBy, opts.orderDirection);
+        query = opts.limitToLast ? query.limitToLast(opts.limitToLast) : query.limit(opts.limitTo);
+        query = opts.startAt ? query.startAt(opts.startAt) : query;
+
+        return query;
+      }
+    ).valueChanges({ idField: 'id' }).pipe(
+      map(res => res)
+    ).toPromise();
   }
 
   docOrNull$(id: string): Observable<T | null> {
     logger.startCollapsed(
-      `[firestore.service] [doc$()]`,
+      `[firestore.service] [docOrNull$()]`,
       [{ log: ['id:', id], type: 'warn' }]
     );
 
@@ -138,12 +144,16 @@ export class DatabaseService<T> {
       );
   }
 
-  getDoc(id: string): Promise<T> {
+  /**
+   *
+   * Returns a document snapshot.
+   *
+   */
+  docOrNull(id: string): Promise<T> {
     return this._firestore.doc<T>(`${this.basePath}/${id}`).get().pipe(
       map(doc => doc.data as unknown as T)
     ).toPromise();
   }
-
 
   create(document: T, docId: string): Promise<void> {
     logger.startCollapsed(
@@ -154,7 +164,7 @@ export class DatabaseService<T> {
     return this._collection().doc(docId).set(
       {
         ...document,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        createdAt: this.getServerTimeStamp(),
       },
       { merge: true }
     ).then(() => logger.endCollapsed());
@@ -177,9 +187,9 @@ export class DatabaseService<T> {
     return this._collection().doc(id).delete().then(() => logger.endCollapsed());
   }
 
-  genUpdateArrayFunction(value: any): any {
-    return firebase.firestore.FieldValue.arrayUnion(value);
-  }
+  // genUpdateArrayFunction(value: any): any {
+  //   return firebase.firestore.FieldValue.arrayUnion(value);
+  // }
 
   // batchWriteDoc(batches: BatchDataModel[]): Promise<void> {
   //   logger.startCollapsed('[firestore.service] [batchWriteDoc]', [batches]);
