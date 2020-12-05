@@ -4,7 +4,7 @@
          nz-col nzXs="12"
          nzSm="8"
          nzMd="6">
-        <app-product></app-product>
+        <app-product (actionButtonEvent)="onProductAction($event)"></app-product>
     </div>
 </div>
 <div class="horizontal-list" nz-row [nzGutter]="16">
@@ -13,6 +13,7 @@
          nz-col nzXs="12"
          nzSm="8"
          nzMd="6">
-        <app-product></app-product>
+        <app-product [product]="product"
+                     (actionButtonEvent)="onProductAction($event)"></app-product>
     </div>
 </div>

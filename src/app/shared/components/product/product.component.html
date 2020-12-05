@@ -1,12 +1,12 @@
 <div class="product">
-    <div class="image">
-        <a routerLink="/products/any">
+    <a [routerLink]="['/products/', product.id]">
+        <div class="image">
             <img [src]="product.imageUrl" [alt]="product.name">
-        </a>
-    </div>
+        </div>
+    </a>
 
     <div class="info padded-05-x">
-        <span nz-typography><strong>{{product.name}}</strong></span>
+        <a [routerLink]="['/products/', product.id]" nz-typography><strong>{{product.name}}</strong></a>
         <div class="price">
             <div nz-typography>
                 <nz-space [nzSize]="'middle'">
@@ -33,9 +33,10 @@
 
             <span class="spacer"></span>
 
-            <span class="total-comments">
-                <i nz-icon nzType="message"> </i> {{product.totalComments}}
-            </span>
+            <button (click)="onAction()" class="add-to-basket" nz-button nzType="default"
+                    nzShape="circle">
+                <i nz-icon nzType="plus" nzTheme="outline"></i>
+            </button>
         </div>
     </div>
 </div>

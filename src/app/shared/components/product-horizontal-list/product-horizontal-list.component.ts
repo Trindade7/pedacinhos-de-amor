@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { ProductModel } from '@app/core/models/product-model';
 
 @Component({
@@ -9,10 +9,18 @@ import { ProductModel } from '@app/core/models/product-model';
 })
 export class ProductHorizontalListComponent implements OnInit {
   @Input() products: ProductModel[] = [];
+  @Output() productActionButtonEvent: EventEmitter<ProductModel> = new EventEmitter();
 
-  constructor () { }
+  constructor () {
+    console.log(this.products);
+  }
 
   ngOnInit(): void {
+    console.log(this.products);
+  }
+
+  onProductAction(emmitedProduct: ProductModel): void {
+    this.productActionButtonEvent.emit(emmitedProduct);
   }
 
 }

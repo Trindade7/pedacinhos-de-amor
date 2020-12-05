@@ -1,11 +1,12 @@
 export interface ProductModel {
+    id: string;
     name: string;
     description: string;
     imageUrl: string;
     price: number;
     discount: number;
     averageReview: number;
-    totalComments: number;
+    totalComments?: number;
     color: string;
     createdAt?: Date;
 }
@@ -16,6 +17,7 @@ export function newProduct(product: ProductModel): ProductModel {
 export function mockProduct(): ProductModel {
 
     return {
+        id: 'testId',
         name: 'any name',
         averageReview: 4,
         price: 300,

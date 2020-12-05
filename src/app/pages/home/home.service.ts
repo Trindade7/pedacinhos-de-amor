@@ -4,8 +4,8 @@ import { BannerSimpleModel } from '@app/core/models/banner-model';
 import { ProductModel } from '@app/core/models/product-model';
 import { StoreModel } from '@app/core/models/store-generic-model';
 import { StoreGeneric } from '@app/core/store.generic';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 import { Logger as logger } from '@app-core/logger';
 
 @Injectable({
@@ -16,34 +16,36 @@ export class HomeService {
     private _productsDb: ProductsDb,
     private _store: HomeStore
   ) {
-    logger.startCollapsed('[home.service] constructor', []);
+    logger.startCollapsed(
+      '[home.service] constructor',
+      ['calling this._productsDb.collection()']
+    );
 
-    this._productsDb.collection().then(
+    this._productsDb.collection$().pipe(
+      take(1),
+    ).subscribe(
       products => {
         this._store.patch({ products, loading: false }, 'get collection');
 
         logger.collapsed('[home.service] Success this._productsDb.collection()', [products]);
+        logger.endCollapsed(['finished log']);
       },
       rejected => {
         this._store.patch({ status: 'rejected', loading: false }, 'get collection');
 
-
         logger.collapsed('[home.service] Error this._productsDb.collection()', [rejected]);
-      }
-
-    ).catch(
-      error => {
+        logger.endCollapsed(['finished log']);
+      },
+      () => {
         this._store.patch({
           loading: false,
-          error
         }, 'get collection');
 
 
-        logger.collapsed('[home.service] success this._productsDb.collection()', [error]);
+        logger.collapsed('[home.service] success this._productsDb.collection()');
+        logger.endCollapsed(['finished log']);
       }
     );
-
-    logger.endCollapsed([]);
   }
 
   get loading$(): Observable<boolean> {
@@ -62,9 +64,15 @@ export class HomeService {
     return this._store.events;
   }
 
-  get products(): Promise<ProductModel[]> {
-    return this._store.products;
+  get products(): Observable<ProductModel[]> {
+    return this._store.products$;
   }
+
+  addToBascket(prod: ProductModel) {
+    console.log(prod);
+
+  }
+
 }
 
 
@@ -74,7 +82,6 @@ export class HomeService {
 class ProductsDb extends DatabaseService<ProductModel>{
   basePath = 'products';
 }
-
 
 
 // *################## Store ###################
@@ -123,6 +130,7 @@ class HomeStore extends StoreGeneric<IViewConversationPage>{
     super({
       loading: true,
       error: null,
+      status: ''
     });
   }
 
@@ -130,11 +138,9 @@ class HomeStore extends StoreGeneric<IViewConversationPage>{
     return this._events;
   }
 
-  get products(): Promise<ProductModel[]> {
+  get products$(): Observable<ProductModel[]> {
     return this.state$.pipe(
-      map(
-        state => state.loading ? [] : state.products
-      )
-    ).toPromise();
+      map(state => state.loading ? [] : state.products)
+    );
   }
 }

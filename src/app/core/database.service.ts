@@ -69,7 +69,7 @@ export class DatabaseService<T> {
    *
    */
   collection$(queryOptions: Partial<QueryOptions> = this._defaultQuery): Observable<T[]> {
-    logger.collapsed('[firestore.service] collection$', [queryOptions]);
+    logger.collapsed('[database.service] collection$', [queryOptions]);
 
     const opts: QueryOptions = Object.assign(this._defaultQuery, queryOptions);
 
@@ -91,7 +91,7 @@ export class DatabaseService<T> {
 
         return query;
       }
-    ).valueChanges().pipe(
+    ).valueChanges({ idField: 'id' }).pipe(
       tap( // LOGGING DATA
         val => {
           logger.collapsed(
@@ -108,27 +108,28 @@ export class DatabaseService<T> {
    *
    */
   collection(queryOptions: Partial<QueryOptions> = this._defaultQuery): Promise<T[]> {
-    logger.collapsed('[firestore.service] collection$', [queryOptions]);
+    logger.collapsed('[database.service] collection', [queryOptions]);
 
     const opts: QueryOptions = Object.assign(this._defaultQuery, queryOptions);
 
     return this._firestore.collection<T>(
-      opts.path ?? this.basePath,
-      ref => {
-        let query = ref.orderBy(opts.orderBy, opts.orderDirection);
-        query = opts.limitToLast ? query.limitToLast(opts.limitToLast) : query.limit(opts.limitTo);
-        query = opts.startAt ? query.startAt(opts.startAt) : query;
+      opts.path ?? this.basePath
+      // ref => ref
+      // ref => {
+      //   let query = ref.orderBy(opts.orderBy, opts.orderDirection);
+      //   query = opts.limitToLast ? query.limitToLast(opts.limitToLast) : query.limit(opts.limitTo);
+      //   query = opts.startAt ? query.startAt(opts.startAt) : query;
 
-        return query;
-      }
+      //   return query;
+      // }
     ).valueChanges({ idField: 'id' }).pipe(
-      map(res => res)
+      tap(res => logger.collapsed('[database.service] collection()', ['Response\n', res]))
     ).toPromise();
   }
 
   docOrNull$(id: string): Observable<T | null> {
     logger.startCollapsed(
-      `[firestore.service] [docOrNull$()]`,
+      `[database.service] [docOrNull$()]`,
       [{ log: ['id:', id], type: 'warn' }]
     );
 
@@ -155,24 +156,24 @@ export class DatabaseService<T> {
     ).toPromise();
   }
 
-  create(document: T, docId: string): Promise<void> {
-    logger.startCollapsed(
-      `[firestore.service] [create()]`,
+  create(document: T, docId?: string): Promise<void> {
+    logger.collapsed(
+      `[database.service] [create()]`,
       [`documentId: ${docId}`, 'document', document, `path: ${this.basePath}`]
     );
 
     return this._collection().doc(docId).set(
       {
         ...document,
-        createdAt: this.getServerTimeStamp(),
+        createdAt: this.getServerTimeStamp()
       },
       { merge: true }
-    ).then(() => logger.endCollapsed());
+    );
   }
 
   update(document: T, docId: string): Promise<void> {
     logger.startCollapsed(
-      `[firestore.service] [update()]`,
+      `[database.service] [update()]`,
       [`documentId: ${docId}`, 'document', document, `path: ${this.basePath}`]
     );
     return this._collection().doc(docId).update(Object.assign({}, document))
@@ -181,7 +182,7 @@ export class DatabaseService<T> {
 
   delete(id: string): Promise<void> {
     logger.startCollapsed(
-      `[firestore.service] [delete()]`,
+      `[database.service] [delete()]`,
       [`documentId: ${id}`, `path: ${this.basePath}`]
     );
     return this._collection().doc(id).delete().then(() => logger.endCollapsed());
@@ -192,7 +193,7 @@ export class DatabaseService<T> {
   // }
 
   // batchWriteDoc(batches: BatchDataModel[]): Promise<void> {
-  //   logger.startCollapsed('[firestore.service] [batchWriteDoc]', [batches]);
+  //   logger.startCollapsed('[database.service] [batchWriteDoc]', [batches]);
 
   //   const batch = this._firestore.firestore.batch();
 
@@ -207,7 +208,7 @@ export class DatabaseService<T> {
 
   //   return batch.commit().catch(
   //     err => {
-  //       logger.collapsed('[firestore.service] ERROR UPDATING FILE', [err]);
+  //       logger.collapsed('[database.service] ERROR UPDATING FILE', [err]);
   //       return err ? console.error(err) : Promise.reject(err);
   //     }
   //   ).finally(() => logger.endCollapsed(['No error']));
@@ -219,7 +220,7 @@ export class DatabaseService<T> {
 
   // addFile(inputFile: File, filePath: string): FileUploadTask {
   //   logger.collapsed(
-  //     '[firestore.service] [addFile()]',
+  //     '[database.service] [addFile()]',
   //     ['file', inputFile, `filePath:${filePath}`]
   //   );
   //   const task = this.storage.upload(filePath + '/' + inputFile.name, inputFile);
@@ -234,7 +235,7 @@ export class DatabaseService<T> {
 
   /// Delete a file
   // deleteFile(filePath: string): Observable<any> {
-  //   logger.collapsed('[firestore.service] [deleteFile()]', [`filePath: ${filePath}`]);
+  //   logger.collapsed('[database.service] [deleteFile()]', [`filePath: ${filePath}`]);
   //   return this.storage.ref(filePath).delete();
   // }
 }

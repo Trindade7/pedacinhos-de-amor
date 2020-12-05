@@ -1,30 +1,34 @@
 <div class="home-container">
     <div class="carousel-container">
-        <nz-carousel>
-            <!-- <nz-carousel nzAutoPlay> -->
+        <nz-carousel nzAutoPlay>
             <div nz-carousel-content *ngFor="let index of [1,2,3,4,5]">
                 <div class="margined-x">
                     <app-banner></app-banner>
                 </div>
             </div>
         </nz-carousel>
+        <!-- <app-banner></app-banner> -->
     </div>
 
     <div class="content-sections flexed col center padded">
         <section class="highlights content">
             <h3 nz-typography>Em destaque</h3>
 
-            <div class="product-list">
-                <app-product-horizontal-list></app-product-horizontal-list>
-            </div>
-        </section>
+            <ng-container *ngIf="homeSvc.loading$ | async; else elseTemplate">
+                <div class="product-list center">
+                    <app-product-horizontal-list-skeleton></app-product-horizontal-list-skeleton>
+                </div>
+            </ng-container>
 
-        <section class="highlights content">
-            <h3 nz-typography>Em foco</h3>
+            <ng-template #elseTemplate>
+                <h3>los</h3>
+                <div class="product-list" *ngIf="homeSvc.products | async as products">
+                    <app-product-horizontal-list [products]="products"
+                                                 (productActionButtonEvent)="homeSvc.addToBascket($event)">
+                    </app-product-horizontal-list>
+                </div>
+            </ng-template>
 
-            <div class="product-list" *ngIf="homeSvc.loading$ |async">
-                <app-product-horizontal-list [products]="homeSvc.products | async"></app-product-horizontal-list>
-            </div>
         </section>
 
         <section class="events content">
@@ -45,7 +49,6 @@
                         <app-banner-simple [bannerData]="event"></app-banner-simple>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>

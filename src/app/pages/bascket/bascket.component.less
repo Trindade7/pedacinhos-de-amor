@@ -1,0 +1,34 @@
+.full-container {
+    width: 100%;
+}
+
+.container {
+    margin: 1rem 0;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.item {
+    border-top: 2px solid #f2f2f2;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    transition: background-color 300ms ease-in-out;
+
+    &:hover{
+        background-color: #f2f2f2;
+    }
+
+    .summary {
+        padding-left: 1rem;
+    }
+}
+
+
+@media only screen and (min-width: 576px) {
+    .item {
+        border-top: 0;
+        border-right: 2px solid #f2f2f2;
+        margin-bottom: 1rem;
+    }
+}

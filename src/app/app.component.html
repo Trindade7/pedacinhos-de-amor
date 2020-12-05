@@ -2,7 +2,7 @@
   <nz-header class="app-header">
     <div class="content-container app-header-content">
       <div class="logo">
-        <img routerLink="/home" src="../assets/icons/logo-darkest-full.png" alt="">
+        <img routerLink="/" src="../assets/icons/logo-darkest-full.png" alt="Pedacinhos de amor">
       </div>
 
       <span class="spacer"></span>
@@ -21,13 +21,13 @@
 
       <nz-space>
         <nz-space-item>
-          <button nz-button nzType="primary" nzSize="medium" nzShape="circle">
+          <button routerLink="/basket" aria-label="basket" nz-button nzType="primary" nzSize="medium" nzShape="circle">
             <i class="trigger" nz-icon nzType="shopping" nzTheme="outline"></i>
           </button>
         </nz-space-item>
       </nz-space>
 
-      <button (click)="toggleNavbar()" nz-button nzType="default" nzSize="large" nzShape="circle">
+      <button (click)="toggleNavbar()" aria-label="app-menu" nz-button nzType="default" nzSize="large" nzShape="circle">
         <i class="trigger"
            nz-icon
            [nzType]="showNavbar ? 'menu-unfold' : 'menu-fold'"></i>
@@ -38,8 +38,16 @@
   <nz-layout>
 
     <nz-layout>
-      <div class="app-inner-layout">
-        <router-outlet></router-outlet>
+      <div class="app-inner-layout flexed col">
+        <ng-container *ngIf="loadingRoute; else elseTemplate">
+          <div>
+            Loading...
+          </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <router-outlet></router-outlet>
+        </ng-template>
+
 
         <footer class="app-footer" nz-typography>
           <div class="content-container padded flexed">

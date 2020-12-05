@@ -24,14 +24,19 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { ProductsComponent } from './pages/products/products.component';
 registerLocaleData(pt);
-
+// import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/auth';
+// import { USE_EMULATOR as USE_DATABASE_EMULATOR } from '@angular/fire/database';
+// import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/firestore';
+// import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/functions';
+import { BascketComponent } from './pages/bascket/bascket.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
     ProductDetailsComponent,
-    ProductsComponent
+    ProductsComponent,
+    BascketComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +47,22 @@ registerLocaleData(pt);
     HttpClientModule,
     NzDrawerModule,
 
+    // *#### STRART EMULATORS
+
+
+
     AppRoutingModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: pt_PT }],
+  providers: [
+    { provide: NZ_I18N, useValue: pt_PT },
+
+    // *#### STRART EMULATORS
+    // { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9099] : undefined },
+    // { provide: USE_DATABASE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9000] : undefined },
+    // { provide: USE_FIRESTORE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 8080] : undefined },
+    // { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
+    // *#### END
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

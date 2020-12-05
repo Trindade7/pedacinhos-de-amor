@@ -1,16 +1,16 @@
-<div class="content-container" nzTypography>
+<div class="content-container padded" nzTypography>
     <div class="ads-bar-container padded-y">
-        <img src="https://placehold.it/1000x150?text=user%20avatar" alt="">
+        <img src="https://placehold.it/1000x150?text=user%20avatar" [alt]="productOrder.product.name">
     </div>
 
     <div *ngIf="productOrder.product as product">
         <div class="product-container flexed center-x wrap">
             <div class="image">
-                <img class="padded-05" src="https://placehold.it/400x400?text=user%20avatar" alt="">
+                <img [src]="product.imageUrl" alt="">
                 <!-- <img [src]="product.imageUrl" alt=""> -->
             </div>
 
-            <section class="details padded-x">
+            <section class="details">
                 <h1 nzTypography class="name">{{product.name}}</h1>
 
                 <div class="rating">
@@ -27,7 +27,7 @@
                             <label for="quantity">
                                 <h3>Quantidade</h3>
                             </label>
-                            <nz-input-number id="quantity"
+                            <nz-input-number aria-label-="quantity" id="quantity" name="quantity"
                                              [(ngModel)]="productOrder.quantity"
                                              [nzMin]="1"
                                              [nzMax]="50"
@@ -43,9 +43,14 @@
                     </div>
                     <div class="sized-box"></div>
                     <div class="flexed">
-                        <button nz-button nzType="primary">Adicionar ao cesto</button>
+                        <button nz-button nzType="primary">
+                            <i nz-icon nzType="shopping"></i>
+                            Adicionar
+                        </button>
                         <div class="sized-box"></div>
-                        <button nz-button nzType="accent">personalizar</button>
+                        <button nz-button nzType="accent">
+                            personalizar
+                        </button>
                         <span class="spacer"></span>
                     </div>
                 </div>
@@ -54,7 +59,7 @@
 
         <div class="sized-box-2"></div>
 
-        <div class="extras flexed wrap padded-05">
+        <div class="extras flexed wrap">
             <nz-card class="container comments" nzTitle="Comentários">
                 <div class="flexed center">
                     <h2>Opções de commmentários em breve</h2>
@@ -63,7 +68,7 @@
 
             <nz-card class="container order-options" nzTitle="Mais opções">
                 <div class="order-details">
-                    <textarea nz-input
+                    <textarea nz-input aria-label="order customizations"
                               placeholder="Pedido personalizado? Escreva o que deseja aqui..."
                               [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
 

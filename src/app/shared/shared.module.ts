@@ -25,6 +25,9 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { ProductSkeletonComponent } from './components/product/product-skeleton/product-skeleton.component';
+import { ProductHorizontalListSkeletonComponent } from './components/product-horizontal-list/product-horizontal-list-skeleton/product-horizontal-list-skeleton.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     ProductComponent,
     ProductHorizontalListComponent,
     BannerSimpleComponent,
-    GridComponent
+    GridComponent,
+    ProductSkeletonComponent,
+    ProductHorizontalListSkeletonComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +49,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzButtonModule,
     NzGridModule,
     NzCardModule,
+    NzSkeletonModule,
     AppRoutingModule
   ],
   exports: [
@@ -59,6 +65,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzResultModule,
     NzInputNumberModule,
     NzCardModule,
+    NzSkeletonModule,
     // ant-design end
 
     // ##### ANTD ADDED
@@ -73,6 +80,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     ProductHorizontalListComponent,
     BannerSimpleComponent,
     GridComponent,
+    ProductHorizontalListSkeletonComponent
   ]
 })
 export class SharedModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BannerModel, BannerSimpleModel } from '@app/core/models/banner-model';
+import { tap } from 'rxjs/operators';
 import { HomeService } from './home.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { HomeService } from './home.service';
 export class HomeComponent implements OnInit {
   constructor (
     public homeSvc: HomeService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
