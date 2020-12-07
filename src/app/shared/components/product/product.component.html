@@ -1,10 +1,12 @@
 <div class="product">
-    <div class="image">
-        <img src="https://placehold.it/200x140?text=user%20avatar" alt="">
-    </div>
+    <a [routerLink]="['/products/', product.id]">
+        <div class="image">
+            <img [src]="product.imageUrl" [alt]="product.name">
+        </div>
+    </a>
 
     <div class="info padded-05-x">
-        <span nz-typography><strong>{{product.name}}</strong></span>
+        <a [routerLink]="['/products/', product.id]" nz-typography><strong>{{product.name}}</strong></a>
         <div class="price">
             <div nz-typography>
                 <nz-space [nzSize]="'middle'">
@@ -16,14 +18,14 @@
 
                     <nz-space-item>
                         <span nz-typography nzType="danger">
-                            <strong>{{product.discaunt | currency: ' KZs '}}</strong>
+                            <strong>{{product.discount | currency: ' KZs '}}</strong>
                         </span>
                     </nz-space-item>
                 </nz-space>
             </div>
 
             <span *ngIf="false" nz-typography nzType="danger">
-                <strong>{{product.discaunt | currency: ' KZs '}}</strong>
+                <strong>{{product.discount | currency: ' KZs '}}</strong>
             </span>
         </div>
         <div class="extras flexed">
@@ -31,9 +33,10 @@
 
             <span class="spacer"></span>
 
-            <span class="total-comments">
-                <i nz-icon nzType="message"> </i> {{product.totalComments}}
-            </span>
+            <button (click)="onAction()" class="add-to-basket" nz-button nzType="default"
+                    nzShape="circle">
+                <i nz-icon nzType="plus" nzTheme="outline"></i>
+            </button>
         </div>
     </div>
 </div>

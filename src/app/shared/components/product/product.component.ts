@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { mockBanner } from '@app/core/models/banner-model';
 import { ProductModel, mockProduct } from '@app/core/models/product-model';
 
@@ -10,10 +10,14 @@ import { ProductModel, mockProduct } from '@app/core/models/product-model';
 })
 export class ProductComponent implements OnInit {
   @Input() product: ProductModel = mockProduct();
+  @Output() actionButtonEvent: EventEmitter<ProductModel> = new EventEmitter();
 
   constructor () { }
 
   ngOnInit(): void {
   }
 
+  onAction() {
+    this.actionButtonEvent.emit(this.product);
+  }
 }

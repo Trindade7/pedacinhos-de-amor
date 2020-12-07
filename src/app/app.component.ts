@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,28 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   showNavbar = false;
+  loadingRoute = true;
+
+  constructor (
+    private _router: Router
+  ) {
+    this._router.events.subscribe(
+      event => {
+        if (event instanceof NavigationStart) {
+          console.log('navigation starts');
+          this.loadingRoute = true;
+        }
+        else if (event instanceof NavigationEnd) {
+          console.log('navigation ends');
+          this.loadingRoute = false;
+        }
+      },
+      error => {
+        this.loadingRoute = false;
+        console.log(error);
+      }
+    );
+  }
 
   toggleNavbar() {
     this.showNavbar = !this.showNavbar;

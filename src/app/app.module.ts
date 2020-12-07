@@ -14,20 +14,29 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { NzI18nService, NZ_I18N } from 'ng-zorro-antd/i18n';
 import { pt_PT } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 // import pt from '@angular/common/locales/pt';
 import pt from '@angular/common/locales/pt-AO';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { ProductsComponent } from './pages/products/products.component';
 registerLocaleData(pt);
-
+// import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/auth';
+// import { USE_EMULATOR as USE_DATABASE_EMULATOR } from '@angular/fire/database';
+// import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/firestore';
+// import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/functions';
+import { BascketComponent } from './pages/bascket/bascket.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProductDetailsComponent,
+    ProductsComponent,
+    BascketComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +47,23 @@ registerLocaleData(pt);
     HttpClientModule,
     NzDrawerModule,
 
+    // *#### STRART EMULATORS
+
+
+
     AppRoutingModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: pt_PT }],
+  providers: [
+    { provide: NZ_I18N, useValue: pt_PT },
+
+    // *#### STRART EMULATORS
+    // { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9099] : undefined },
+    // { provide: USE_DATABASE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9000] : undefined },
+    // { provide: USE_FIRESTORE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 8080] : undefined },
+    // { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
+    // *#### END
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

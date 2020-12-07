@@ -1,12 +1,14 @@
 export interface ProductModel {
+    id: string;
     name: string;
     description: string;
     imageUrl: string;
     price: number;
-    discaunt: number;
+    discount: number;
     averageReview: number;
-    totalComments: number;
+    totalComments?: number;
     color: string;
+    createdAt?: Date;
 }
 
 export function newProduct(product: ProductModel): ProductModel {
@@ -15,10 +17,11 @@ export function newProduct(product: ProductModel): ProductModel {
 export function mockProduct(): ProductModel {
 
     return {
+        id: 'testId',
         name: 'any name',
         averageReview: 4,
         price: 300,
-        discaunt: 20,
+        discount: 20,
         totalComments: 65,
         color: randomColor(),
         imageUrl: 'https://placehold.it/100x100?text=user%20avatar',

@@ -1,78 +1,8 @@
-<!-- <nz-layout class="app-layout">
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i class="trigger"
-             nz-icon
-             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-        </span>
-        <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
-          <li nz-menu-item nzSelected>nav 1</li>
-          <li nz-menu-item>nav 2</li>
-          <li nz-menu-item>nav 3</li>
-        </ul>
-      </div>
-
-      <nz-layout>
-        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-          <input type="text" nz-input placeholder="input search text" />
-        </nz-input-group>
-        <ng-template #suffixIconButton>
-          <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
-        </ng-template>
-      </nz-layout>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-  </nz-layout>
-
-  <nz-sider class="menu-sidebar"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
-
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
-      </a>
-    </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
-</nz-layout> -->
-
 <nz-layout class="app-container">
   <nz-header class="app-header">
     <div class="content-container app-header-content">
       <div class="logo">
-        <img routerLink="/home" src="../assets/icons/logo-darkest-full.png" alt="">
+        <img routerLink="/" src="../assets/icons/logo-darkest-full.png" alt="Pedacinhos de amor">
       </div>
 
       <span class="spacer"></span>
@@ -90,18 +20,14 @@
       <span class="spacer"></span>
 
       <nz-space>
-        <!-- <div class="flexed center padded-05-x ">
-          <input class="search-input" nz-input placeholder="Procurar..." />
-        </div> -->
-
         <nz-space-item>
-          <button nz-button nzType="primary" nzSize="medium" nzShape="circle">
+          <button routerLink="/basket" aria-label="basket" nz-button nzType="primary" nzSize="medium" nzShape="circle">
             <i class="trigger" nz-icon nzType="shopping" nzTheme="outline"></i>
           </button>
         </nz-space-item>
       </nz-space>
 
-      <button (click)="toggleNavbar()" nz-button nzType="default" nzSize="large" nzShape="circle">
+      <button (click)="toggleNavbar()" aria-label="app-menu" nz-button nzType="default" nzSize="large" nzShape="circle">
         <i class="trigger"
            nz-icon
            [nzType]="showNavbar ? 'menu-unfold' : 'menu-fold'"></i>
@@ -112,8 +38,16 @@
   <nz-layout>
 
     <nz-layout>
-      <div class="app-inner-layout">
-        <router-outlet></router-outlet>
+      <div class="app-inner-layout flexed col">
+        <ng-container *ngIf="loadingRoute; else elseTemplate">
+          <div>
+            Loading...
+          </div>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <router-outlet></router-outlet>
+        </ng-template>
+
 
         <footer class="app-footer" nz-typography>
           <div class="content-container padded flexed">

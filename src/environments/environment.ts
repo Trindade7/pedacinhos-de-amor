@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  useEmulators: true,
+
   firebaseConfig: {
     apiKey: "AIzaSyD0CKxdHHEB6Xt_ttBLMin5vcmA8mSTnjk",
     authDomain: "pedacinhos-de-amor.firebaseapp.com",
@@ -24,4 +26,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error';  // Included with Angular CLI.
