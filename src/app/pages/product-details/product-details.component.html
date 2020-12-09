@@ -1,85 +1,144 @@
 <div class="content-container padded" nzTypography>
-    <div class="ads-bar-container padded-y">
-        <img src="https://placehold.it/1000x150?text=user%20avatar" [alt]="productOrder.product.name">
-    </div>
+  <div class="ads-bar-container padded-y">
+    <img src="https://placehold.it/1000x150?text=user%20avatar" [alt]="productOrder.product.name">
+  </div>
 
-    <div *ngIf="productOrder.product as product">
-        <div class="product-container flexed center-x wrap">
-            <div class="image">
-                <img [src]="product.imageUrl" alt="">
-                <!-- <img [src]="product.imageUrl" alt=""> -->
-            </div>
+  <ng-container *ngIf="(productSvc.product$ | async) as product; else loadingTemplate">
+    <div class="product-container flexed center-x wrap">
+      <div class="image flexed center">
+        <img [src]="product.imageUrl" [alt]="product.name">
+      </div>
 
-            <section class="details">
-                <h1 nzTypography class="name">{{product.name}}</h1>
+      <section class="details">
+        <h1 nzTypography class="name">{{product.name}}</h1>
 
-                <div class="rating">
-                    <nz-rate [ngModel]="product.averageReview" nzAllowHalf nzDisabled></nz-rate>
-                </div>
+        <div class="rating">
+          <nz-rate [ngModel]="product.averageReview" nzAllowHalf nzDisabled></nz-rate>
+        </div>
 
-                <p class="description">
-                    {{product.description | slice:0:300}}
-                </p>
+        <p class="description">
+          {{product.description | slice:0:300}}
+        </p>
 
-                <div class="order-summary">
-                    <div class="options flexed">
-                        <section class="quantity">
-                            <label for="quantity">
-                                <h3>Quantidade</h3>
-                            </label>
-                            <nz-input-number aria-label-="quantity" id="quantity" name="quantity"
-                                             [(ngModel)]="productOrder.quantity"
-                                             [nzMin]="1"
-                                             [nzMax]="50"
-                                             [nzStep]="1"></nz-input-number>
-                        </section>
-
-                        <div class="sized-box"></div>
-
-                        <section class="price">
-                            <h3>Preço</h3>
-                            <h2>{{product.price * productOrder.quantity | currency: 'Kzs '}}</h2>
-                        </section>
-                    </div>
-                    <div class="sized-box"></div>
-                    <div class="flexed">
-                        <button nz-button nzType="primary">
-                            <i nz-icon nzType="shopping"></i>
-                            Adicionar
-                        </button>
-                        <div class="sized-box"></div>
-                        <button nz-button nzType="accent">
-                            personalizar
-                        </button>
-                        <span class="spacer"></span>
-                    </div>
-                </div>
+        <div class="order-summary">
+          <div class="options flexed">
+            <section class="quantity">
+              <label for="quantity">
+                <h3>Quantidade</h3>
+              </label>
+              <nz-input-number aria-label-="quantity" id="quantity" name="quantity"
+                               [(ngModel)]="productOrder.quantity"
+                               [nzMin]="1"
+                               [nzMax]="50"
+                               [nzStep]="1"></nz-input-number>
             </section>
+
+            <div class="sized-box"></div>
+
+            <section class="price">
+              <h3>Preço</h3>
+              <h2>{{product.price * productOrder.quantity | currency: 'Kzs '}}</h2>
+            </section>
+          </div>
+          <div class="sized-box"></div>
+          <div class="flexed">
+            <button nz-button nzType="primary">
+              <i nz-icon nzType="shopping"></i>
+              Adicionar
+            </button>
+            <div class="sized-box"></div>
+            <a fragment="order-options" (click)="personalizeOrder()" nz-button nzType="accent">
+              personalizar encomenda
+            </a>
+            <span class="spacer"></span>
+          </div>
         </div>
-
-        <div class="sized-box-2"></div>
-
-        <div class="extras flexed wrap">
-            <nz-card class="container comments" nzTitle="Comentários">
-                <div class="flexed center">
-                    <h2>Opções de commmentários em breve</h2>
-                </div>
-            </nz-card>
-
-            <nz-card class="container order-options" nzTitle="Mais opções">
-                <div class="order-details">
-                    <textarea nz-input aria-label="order customizations"
-                              placeholder="Pedido personalizado? Escreva o que deseja aqui..."
-                              [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
-
-                    <div class="sized-box"></div>
-
-                    <div class="flexed">
-                        <span class="spacer"></span>
-                        <button nz-button nzType="primary">Adicionar ao cesto</button>
-                    </div>
-                </div>
-            </nz-card>
-        </div>
+      </section>
     </div>
+
+    <div class="sized-box-2"></div>
+
+    <div class="extras flexed wrap">
+      <nz-card class="container comments" nzTitle="Comentários">
+        <div class="flexed center">
+          <h2>Opções de commmentários em breve</h2>
+        </div>
+      </nz-card>
+
+      <nz-card id="order-options" class="container order-options" nzTitle="Mais opções">
+        <div class="order-details">
+          <textarea #orderDetails
+                    nz-input
+                    aria-label="order customizations"
+                    placeholder="Pedido personalizado? Escreva o que deseja aqui..."
+                    [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+
+          <div class="sized-box"></div>
+
+          <div class="flexed">
+            <span class="spacer"></span>
+            <button nz-button nzType="primary">Adicionar ao cesto</button>
+          </div>
+        </div>
+      </nz-card>
+    </div>
+  </ng-container>
+
+  <ng-template #loadingTemplate>
+    <div class="product-container flexed center-x wrap">
+      <div class="image flexed center">
+        <nz-skeleton-element
+                             nzType="image"
+                             [nzActive]="true">
+        </nz-skeleton-element>
+
+      </div>
+
+      <section class="details">
+        <h1 nzTypography class="name">
+          <nz-skeleton-element nzType="input"
+                               [nzActive]="true"
+                               [nzSize]="'small'"
+                               style="width:100%">
+          </nz-skeleton-element>
+
+        </h1>
+
+        <div class="rating">
+          <nz-skeleton-element nzType="input"
+                               [nzActive]="true"
+                               [nzSize]="'small'"
+                               style="width:100%"></nz-skeleton-element>
+        </div>
+
+        <div class="description">
+          <nz-skeleton-element nzType="input"
+                               [nzActive]="true"
+                               [nzSize]="'small'"
+                               style="width:100%"></nz-skeleton-element>
+
+
+          <nz-skeleton-element nzType="input"
+                               [nzActive]="true"
+                               [nzSize]="'small'"
+                               style="width:100%"></nz-skeleton-element>
+        </div>
+
+        <div class="order-summary">
+          <div class="options flexed">
+            <div class="sized-box"></div>
+          </div>
+
+          <div class="sized-box"></div>
+
+          <nz-skeleton-element nzType="input"
+                               [nzActive]="true"
+                               [nzSize]="'small'"
+                               style="width:100%"></nz-skeleton-element>
+        </div>
+      </section>
+    </div>
+
+    <div class="sized-box-2"></div>
+  </ng-template>
 </div>

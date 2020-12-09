@@ -1,94 +1,82 @@
 <div class="home-container">
-    <div class="carousel-container">
-        <nz-carousel nzAutoPlay>
-            <div nz-carousel-content *ngFor="let index of [1,2,3,4,5]">
-                <div class="margined-x">
-                    <app-banner></app-banner>
-                </div>
-            </div>
-        </nz-carousel>
-        <!-- <app-banner></app-banner> -->
-    </div>
+  <div class="carousel-container">
+    <nz-carousel nzAutoPlay>
+      <div nz-carousel-content *ngFor="let index of [1,2,3,4,5]">
+        <div class="margined-x">
+          <app-banner></app-banner>
+        </div>
+      </div>
+    </nz-carousel>
+  </div>
 
-    <div class="content-sections flexed col center padded">
-        <section class="highlights content">
-            <h3 nz-typography>Em destaque</h3>
+  <div class="content-sections flexed col center padded">
+    <section class="highlights content">
+      <h3 nz-typography>Em destaque</h3>
+      <div class="product-list">
+        <app-product-horizontal-list [products]="homeSvc.products$ | async "
+                                     (productActionButtonEvent)="homeSvc.addToBascket($event)">
+        </app-product-horizontal-list>
+      </div>
+    </section>
 
-            <ng-container *ngIf="homeSvc.loading$ | async; else elseTemplate">
-                <div class="product-list center">
-                    <app-product-horizontal-list-skeleton></app-product-horizontal-list-skeleton>
-                </div>
-            </ng-container>
+    <section class="events content">
+      <header nz-typography>
+        <h3>Eventos especiais</h3>
+        <p>
+          Bolos para todos os eventos e estílos.
+          Do mais <strong nz-typography nzType="danger">VISTOSO</strong> ao mais <span>simples</span>
+        </p>
+      </header>
 
-            <ng-template #elseTemplate>
-                <h3>los</h3>
-                <div class="product-list" *ngIf="homeSvc.products | async as products">
-                    <app-product-horizontal-list [products]="products"
-                                                 (productActionButtonEvent)="homeSvc.addToBascket($event)">
-                    </app-product-horizontal-list>
-                </div>
-            </ng-template>
+      <div class="events-list">
+        <div class="horizontal-list" nz-row [nzGutter]="0">
+          <div class="item"
+               *ngFor="let event of homeSvc.events"
+               nz-col nzXs="12"
+               nzSm="8">
+            <app-banner-simple [bannerData]="event"></app-banner-simple>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-        </section>
+  <div class="content-sections flexed col center padded">
+    <section nz-typography class="social-section content">
+      <h3>Redes sociais</h3>
 
-        <section class="events content">
-            <header nz-typography>
-                <h3>Eventos especiais</h3>
-                <p>
-                    Bolos para todos os eventos e estílos.
-                    Do mais <strong nz-typography nzType="danger">VISTOSO</strong> ao mais <span>simples</span>
-                </p>
-            </header>
+      <div class="socials flexed">
+        <div class="social-card facebook flexed padded">
+          <div class="info">
+            <h3>Facebook</h3>
 
-            <div class="events-list">
-                <div class="horizontal-list" nz-row [nzGutter]="0">
-                    <div class="item"
-                         *ngFor="let event of homeSvc.events"
-                         nz-col nzXs="12"
-                         nzSm="8">
-                        <app-banner-simple [bannerData]="event"></app-banner-simple>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+            <p>
+              Segue e mantem-te em contacto no facebook
+            </p>
+          </div>
 
-    <div class="content-sections flexed col center padded">
-        <section nz-typography class="social-section content">
-            <h3>Redes sociais</h3>
+          <div class="action">
+            <button nz-button nzType="default" nzGhost>Ver página</button>
+          </div>
+        </div>
 
-            <div class="socials flexed">
-                <div class="social-card facebook flexed padded">
-                    <div class="info">
-                        <h3>Facebook</h3>
+        <div class="social-card instagram flexed padded">
+          <div class="info">
+            <h3>Instagram</h3>
 
-                        <p>
-                            Segue e mantem-te em contacto no facebook
-                        </p>
-                    </div>
+            <p>
+              Acompanha a nossa galeria no instagram
+            </p>
+          </div>
 
-                    <div class="action">
-                        <button nz-button nzType="default" nzGhost>Ver página</button>
-                    </div>
-                </div>
-
-                <div class="social-card instagram flexed padded">
-                    <div class="info">
-                        <h3>Instagram</h3>
-
-                        <p>
-                            Acompanha a nossa galeria no instagram
-                        </p>
-                    </div>
-
-                    <div class="action">
-                        <a href="https://www.instagram.com/pedacinhosdeamor06"
-                           nz-button
-                           nzType="default"
-                           nzGhost>Ver página</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+          <div class="action">
+            <a href="https://www.instagram.com/pedacinhosdeamor06"
+               nz-button
+               nzType="default"
+               nzGhost>Ver página</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>

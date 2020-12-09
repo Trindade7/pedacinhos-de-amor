@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { DatabaseService } from '@app/core/database.service';
+import { DatabaseGenericService } from '@app/core/database-generic.service';
 import { BannerSimpleModel } from '@app/core/models/banner-model';
 import { ProductModel } from '@app/core/models/product-model';
 import { StoreModel } from '@app/core/models/store-generic-model';
@@ -78,7 +78,7 @@ export class BasketService {
 // *################## Db Service ###################
 
 @Injectable({ providedIn: 'root' })
-class BasketDb extends DatabaseService<ProductOrderModel<ProductModel>>{
+class BasketDb extends DatabaseGenericService<ProductOrderModel<ProductModel>>{
   basePath = 'basket';
 }
 

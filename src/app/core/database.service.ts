@@ -1,50 +1,32 @@
 import { Inject, Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { tap, map, take, timeout } from 'rxjs/operators';
+import { QueryOptions } from './database-generic.service';
 import { Logger as logger } from '@app-core/logger';
+import firebase from 'firebase/app';
+import { watch } from "rxjs-watcher";
 
-export interface QueryOptions {
-  limitToLast: number;
-  orderBy: 'createdAt' | 'updatedAt' | 'name' | 'email';
-  orderDirection: 'asc' | 'desc';
-  limitTo: number;
-  arrayContains?: {
-    arrayName: string;
-    value: any;
-  };
-  path: string | null;
-  startAt?: any;
-}
+type QueryModel = Omit<QueryOptions, 'path'>;
+
 @Injectable({
   providedIn: 'root'
 })
-export class DatabaseService<T> {
-  private _defaultQuery: QueryOptions = {
+export class DatabaseService {
+  private _defaultQuery: QueryModel = {
     orderBy: 'createdAt',
     orderDirection: 'asc',
     limitTo: 20,
     limitToLast: 20,
-    path: null,
   };
 
-  protected basePath = '';
-
   constructor (
-    @Inject(AngularFirestore) private _firestore: AngularFirestore,
+    private _firestore: AngularFirestore,
   ) { }
-  private _collection(path: string = this.basePath): AngularFirestoreCollection<T> {
-    return this._firestore.collection(path);
-    // return this.firestore.collection(path, ref => ref.orderBy(orderBy, orderDirection));
-  }
 
-  setBasePath(path: string): void {
-    this.basePath = path;
-  }
-
-  get getServerTimeStamp(): any {
-    // return firebase.firestore.FieldValue.serverTimestamp();
-    return '';
+  private get _getServerTimeStamp(): any {
+    // return firebase.default.firestore.FieldValue.serverTimestamp();
+    return firebase.firestore.FieldValue.serverTimestamp();
   }
 
   createId(): string {
@@ -55,7 +37,7 @@ export class DatabaseService<T> {
   /**
    *
    *
-   * Returns an Observable of a collection of items.
+   * Returns an Observable of a collection of items from a given query options.
    *
    * Default options are:
    *
@@ -68,53 +50,17 @@ export class DatabaseService<T> {
    * #path: null,
    *
    */
-  collection$(queryOptions: Partial<QueryOptions> = this._defaultQuery): Observable<T[]> {
-    logger.collapsed('[database.service] collection$', [queryOptions]);
+  collection$<T>(
+    path: string,
+    options: Partial<QueryModel> = this._defaultQuery
+  ): Observable<T[]> {
+    // logger.collapsed('[database.service] collection$', [options]);
 
-    const opts: QueryOptions = Object.assign(this._defaultQuery, queryOptions);
-
-    return this._firestore.collection<T>(
-      opts.path ?? this.basePath,
-      ref => {
-
-        // if (opts.arrayContains) {
-        //   return ref.where(
-        //     opts.arrayContains.arrayName,
-        //     'array-contains',
-        //     opts.arrayContains.value
-        //   );
-        // }
-
-        let query = ref.orderBy(opts.orderBy, opts.orderDirection);
-        query = opts.limitToLast ? query.limitToLast(opts.limitToLast) : query.limit(opts.limitTo);
-        query = opts.startAt ? query.startAt(opts.startAt) : query;
-
-        return query;
-      }
-    ).valueChanges({ idField: 'id' }).pipe(
-      tap( // LOGGING DATA
-        val => {
-          logger.collapsed(
-            `>firestore.servicce streaming [${this.basePath}] [collection$]`,
-            [val, 'Options', queryOptions]);
-        }
-      )
-    );
-  }
-
-  /**
-   *
-   * Returns a collection snapshot.
-   *
-   */
-  collection(queryOptions: Partial<QueryOptions> = this._defaultQuery): Promise<T[]> {
-    logger.collapsed('[database.service] collection', [queryOptions]);
-
-    const opts: QueryOptions = Object.assign(this._defaultQuery, queryOptions);
+    const opts: QueryModel = Object.assign(this._defaultQuery, options);
 
     return this._firestore.collection<T>(
-      opts.path ?? this.basePath
-      // ref => ref
+      path,
+      // ref
       // ref => {
       //   let query = ref.orderBy(opts.orderBy, opts.orderDirection);
       //   query = opts.limitToLast ? query.limitToLast(opts.limitToLast) : query.limit(opts.limitTo);
@@ -122,26 +68,55 @@ export class DatabaseService<T> {
 
       //   return query;
       // }
+    ).valueChanges({ idField: 'id' })
+      .pipe(
+        watch(`[home.service] products()`, 2),
+        tap(val => logger.collapsed(`[home.service] products() tap val =>\n`, [val]))
+      );
+  }
+
+  /**
+   *
+   * Returns a collection snapshot.
+   *
+   */
+  collection<T>(
+    path: string,
+    options: Partial<QueryModel> = this._defaultQuery
+  ): Promise<T[]> {
+    logger.collapsed('[database.service] collection', [options]);
+
+    const opts: QueryModel = Object.assign(this._defaultQuery, options);
+
+    return this._firestore.collection<T>(
+      path,
+      ref => {
+        let query = ref.orderBy(opts.orderBy, opts.orderDirection);
+        query = opts.limitToLast ? query.limitToLast(opts.limitToLast) : query.limit(opts.limitTo);
+        query = opts.startAt ? query.startAt(opts.startAt) : query;
+
+        return query;
+      }
     ).valueChanges({ idField: 'id' }).pipe(
       tap(res => logger.collapsed('[database.service] collection()', ['Response\n', res]))
     ).toPromise();
   }
 
-  docOrNull$(id: string): Observable<T | null> {
+  docOrNull$<T>(id: string, collectionPath: string): Observable<T | null> {
     logger.startCollapsed(
       `[database.service] [docOrNull$()]`,
       [{ log: ['id:', id], type: 'warn' }]
     );
 
-    const path = `${this.basePath}/${id}`;
+    const fullPath = `${collectionPath}/${id}`;
 
-    return this._firestore.doc<T>(path).valueChanges()
+    return this._firestore.doc<T>(fullPath).valueChanges({ idField: 'id' })
       .pipe(
         tap( // LOGGING DATA
-          val => logger.endCollapsed([`RESPONSE streaming from [${path}]`, val]),
-          err => logger.endCollapsed([`ERROR streaming from [${path}] `, err]),
+          val => logger.endCollapsed([`RESPONSE streaming from [${fullPath}]`, val]),
+          err => logger.endCollapsed([`ERROR streaming from [${fullPath}] `, err]),
         ),
-        map(doc => doc ? doc : null)
+        map(doc => doc ? doc as unknown as T : null)
       );
   }
 
@@ -150,42 +125,70 @@ export class DatabaseService<T> {
    * Returns a document snapshot.
    *
    */
-  docOrNull(id: string): Promise<T> {
-    return this._firestore.doc<T>(`${this.basePath}/${id}`).get().pipe(
-      map(doc => doc.data as unknown as T)
-    ).toPromise();
-  }
+  docOrNull<T>(id: string, collectionPath: string): Promise<T | null> {
+    logger.startCollapsed(
+      `[database.service] [docOrNull()]`,
+      [{ log: ['id:', id, '\ncollectionPath', collectionPath], type: 'warn' }]
+    );
 
-  create(document: T, docId?: string): Promise<void> {
+    return this._firestore.doc<T>(`${collectionPath}/${id}`)
+      .valueChanges({ idField: 'id' })
+      .pipe(
+        map(doc => doc as unknown as T),
+        take(1)
+      ).toPromise();
+  }
+  // docOrNull<T>(id: string, collectionPath: string): Promise<T> {
+  //   logger.startCollapsed(
+  //     `[database.service] [docOrNull()]`,
+  //     [{ log: ['id:', id, '\ncollectionPath', collectionPath], type: 'warn' }]
+  //   );
+
+  //   return this._firestore.doc<T>(`${collectionPath}/${id}`).get().pipe(
+  //     map(doc => doc.data as unknown as T),
+  //     watch(`[database.service] docOrNull$`, 10)
+  //   ).toPromise();
+  // }
+
+  create<T>(document: T, collectionPath: string, docId?: string): Promise<void> {
     logger.collapsed(
       `[database.service] [create()]`,
-      [`documentId: ${docId}`, 'document', document, `path: ${this.basePath}`]
+      [`documentId: ${docId}`, 'document', document, `path: ${collectionPath}`]
     );
 
-    return this._collection().doc(docId).set(
-      {
-        ...document,
-        createdAt: this.getServerTimeStamp()
-      },
-      { merge: true }
-    );
+    return this._firestore
+      .collection(collectionPath)
+      .doc(docId)
+      .set(
+        {
+          ...document,
+          lastUpdate: this._getServerTimeStamp()
+        },
+        { merge: true }
+      );
   }
 
-  update(document: T, docId: string): Promise<void> {
+  update<T>(document: T, collectionPath: string, docId: string): Promise<void> {
     logger.startCollapsed(
       `[database.service] [update()]`,
-      [`documentId: ${docId}`, 'document', document, `path: ${this.basePath}`]
+      [`documentId: ${docId}`, 'document', document, `path: ${collectionPath}`]
     );
-    return this._collection().doc(docId).update(Object.assign({}, document))
+
+    return this._firestore
+      .collection(collectionPath)
+      .doc(docId)
+      .update(Object.assign({}, document))
       .then(() => logger.endCollapsed());
   }
 
-  delete(id: string): Promise<void> {
+  delete(id: string, collectionPath: string): Promise<void> {
     logger.startCollapsed(
       `[database.service] [delete()]`,
-      [`documentId: ${id}`, `path: ${this.basePath}`]
+      [`documentId: ${id}`, `path: ${collectionPath}`]
     );
-    return this._collection().doc(id).delete().then(() => logger.endCollapsed());
+
+    return this._firestore
+      .collection(collectionPath).doc(id).delete().then(() => logger.endCollapsed());
   }
 
   // genUpdateArrayFunction(value: any): any {

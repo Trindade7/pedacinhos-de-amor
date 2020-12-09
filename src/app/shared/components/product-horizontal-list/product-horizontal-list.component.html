@@ -1,19 +1,24 @@
-<div class="horizontal-list" nz-row [nzGutter]="16">
-    <div class="item"
-         *ngFor="let product of [1,2,3,4,5,6,7,8]"
-         nz-col nzXs="12"
-         nzSm="8"
-         nzMd="6">
-        <app-product (actionButtonEvent)="onProductAction($event)"></app-product>
+<ng-container *ngIf="!products; else productsTemplate">
+    <div class="horizontal-list" nz-row [nzGutter]="16">
+        <div class="item"
+             *ngFor="let product of [1,2,3,4]"
+             nz-col nzXs="12"
+             nzSm="8"
+             nzMd="6">
+            <app-product-skeleton></app-product-skeleton>
+        </div>
     </div>
-</div>
-<div class="horizontal-list" nz-row [nzGutter]="16">
-    <div class="item"
-         *ngFor="let product of products"
-         nz-col nzXs="12"
-         nzSm="8"
-         nzMd="6">
-        <app-product [product]="product"
-                     (actionButtonEvent)="onProductAction($event)"></app-product>
+</ng-container>
+
+<ng-template #productsTemplate>
+    <div class="horizontal-list" nz-row [nzGutter]="16">
+        <div class="item"
+             *ngFor="let product of products"
+             nz-col nzXs="12"
+             nzSm="8"
+             nzMd="6">
+            <app-product [product]="product"
+                         (actionButtonEvent)="onProductAction($event)"></app-product>
+        </div>
     </div>
-</div>
+</ng-template>

@@ -1,4 +1,6 @@
 {
+  "editor.formatOnSave": true,
+  "tslint.autoFixOnSave": true,
   "eslint.options": {
     "extensions": [".ts", ".html"]
   },

@@ -8,7 +8,7 @@ import { ProductModel } from '@app/core/models/product-model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductHorizontalListComponent implements OnInit {
-  @Input() products: ProductModel[] = [];
+  @Input() products!: ProductModel[];
   @Output() productActionButtonEvent: EventEmitter<ProductModel> = new EventEmitter();
 
   constructor () {
