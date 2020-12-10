@@ -38,7 +38,14 @@ export class ProductDetailsService {
     return this._product$;
   }
 
-  get id() {
+  get id(): string {
     return this._id;
+  }
+
+  async addToBasket(quantity: number, details: string): Promise<string> {
+    const product = await this._product$.toPromise();
+    console.log({ quantity, details, product });
+
+    return new Promise(() => 'added');
   }
 }

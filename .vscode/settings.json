@@ -31,5 +31,6 @@
     "statusBar.foreground": "#15202b",
     "statusBarItem.hoverBackground": "#ff3b3bb2",
     "tab.activeBorder": "#ffa1a1b2"
-  }
+  },
+  "html.format.endWithNewline": true
 }

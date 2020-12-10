@@ -47,10 +47,6 @@ import { BascketComponent } from './pages/bascket/bascket.component';
     HttpClientModule,
     NzDrawerModule,
 
-    // *#### STRART EMULATORS
-
-
-
     AppRoutingModule,
   ],
   providers: [

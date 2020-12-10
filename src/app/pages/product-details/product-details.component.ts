@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Route, Router, RouterState } from '@angular/router';
 import { ProductOrderModel } from '@app/core/models/order-model';
 import { mockProduct, ProductModel } from '@app/core/models/product-model';
@@ -9,25 +10,25 @@ import { ProductDetailsService } from './product-details.service';
   styleUrls: ['./product-details.component.less']
 })
 export class ProductDetailsComponent implements OnInit {
-  productOrder: ProductOrderModel<ProductModel> = {
-    product: mockProduct(),
-    details: '',
-    quantity: 1
-  };
-
   @ViewChild('orderDetails') orderDetails!: ElementRef<HTMLTextAreaElement>;
 
+  details = '';
+  quantity = 1;
 
   constructor (
     public productSvc: ProductDetailsService
-  ) {
-    console.log(`\n\nparams\n\n`, productSvc.id, '\n\n\n');
-
-  }
+  ) { }
 
   ngOnInit(): void { }
 
-  personalizeOrder(): void {
+  addToBasket() {
+    this.productSvc.addToBasket(this.quantity, this.details).then(
+      a => console.log(a)
+    );
+    console.log('nbb');
+  }
+
+  goToPersonalizeOrder(): void {
     this.navigateToSection('order-options');
 
     setTimeout(() => {

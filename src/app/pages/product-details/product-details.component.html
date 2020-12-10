@@ -1,6 +1,6 @@
 <div class="content-container padded" nzTypography>
   <div class="ads-bar-container padded-y">
-    <img src="https://placehold.it/1000x150?text=user%20avatar" [alt]="productOrder.product.name">
+    <img src="https://placehold.it/1000x150?text=user%20avatar" alt="adverts bar">
   </div>
 
   <ng-container *ngIf="(productSvc.product$ | async) as product; else loadingTemplate">
@@ -27,7 +27,7 @@
                 <h3>Quantidade</h3>
               </label>
               <nz-input-number aria-label-="quantity" id="quantity" name="quantity"
-                               [(ngModel)]="productOrder.quantity"
+                               [(ngModel)]="quantity"
                                [nzMin]="1"
                                [nzMax]="50"
                                [nzStep]="1"></nz-input-number>
@@ -37,7 +37,7 @@
 
             <section class="price">
               <h3>Preço</h3>
-              <h2>{{product.price * productOrder.quantity | currency: 'Kzs '}}</h2>
+              <h2>{{product.price * quantity | currency: 'Kzs '}}</h2>
             </section>
           </div>
           <div class="sized-box"></div>
@@ -47,7 +47,10 @@
               Adicionar
             </button>
             <div class="sized-box"></div>
-            <a fragment="order-options" (click)="personalizeOrder()" nz-button nzType="accent">
+            <!-- <a fragment="order-options" -->
+            <a (click)="goToPersonalizeOrder()"
+               nz-button
+               nzType="accent">
               personalizar encomenda
             </a>
             <span class="spacer"></span>
@@ -59,26 +62,32 @@
     <div class="sized-box-2"></div>
 
     <div class="extras flexed wrap">
-      <nz-card class="container comments" nzTitle="Comentários">
-        <div class="flexed center">
-          <h2>Opções de commmentários em breve!</h2>
-        </div>
-      </nz-card>
-
       <nz-card id="order-options" class="container order-options" nzTitle="Mais opções">
         <div class="order-details">
           <textarea #orderDetails
+                    [(ngModel)]="details"
                     nz-input
-                    aria-label="order customizations"
+                    [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+                    minlength="10"
+                    maxlength="300"
                     placeholder="Pedido personalizado? Escreva o que deseja aqui..."
-                    [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                    aria-label="order customizations">
+                  </textarea>
 
           <div class="sized-box"></div>
 
           <div class="flexed">
             <span class="spacer"></span>
-            <button nz-button nzType="primary">Adicionar ao cesto</button>
+            <button (click)="addToBasket()"
+                    nz-button
+                    nzType="primary">Adicionar ao cesto</button>
           </div>
+        </div>
+      </nz-card>
+
+      <nz-card class="container comments" nzTitle="Comentários">
+        <div class="flexed center">
+          <h2>Opções de commmentários em breve!</h2>
         </div>
       </nz-card>
     </div>
