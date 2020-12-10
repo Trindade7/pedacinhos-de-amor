@@ -42,7 +42,7 @@
           </div>
           <div class="sized-box"></div>
           <div class="flexed">
-            <button nz-button nzType="primary">
+            <button (click)="addToBasket()" nz-button nzType="primary">
               <i nz-icon nzType="shopping"></i>
               Adicionar
             </button>
@@ -78,9 +78,10 @@
 
           <div class="flexed">
             <span class="spacer"></span>
-            <button (click)="addToBasket()"
-                    nz-button
-                    nzType="primary">Adicionar ao cesto</button>
+            <button (click)="addToBasket()" nz-button nzType="primary">
+              <i nz-icon nzType="shopping"></i>
+              Adicionar
+            </button>
           </div>
         </div>
       </nz-card>

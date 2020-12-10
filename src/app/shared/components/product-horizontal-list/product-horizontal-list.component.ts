@@ -11,13 +11,9 @@ export class ProductHorizontalListComponent implements OnInit {
   @Input() products!: ProductModel[];
   @Output() productActionButtonEvent: EventEmitter<ProductModel> = new EventEmitter();
 
-  constructor () {
-    console.log(this.products);
-  }
+  constructor () { }
 
-  ngOnInit(): void {
-    console.log(this.products);
-  }
+  ngOnInit(): void { }
 
   onProductAction(emmitedProduct: ProductModel): void {
     this.productActionButtonEvent.emit(emmitedProduct);

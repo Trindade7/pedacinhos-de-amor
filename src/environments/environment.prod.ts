@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  useEmulators: false,
   firebaseConfig: {
     apiKey: "AIzaSyD0CKxdHHEB6Xt_ttBLMin5vcmA8mSTnjk",
     authDomain: "pedacinhos-de-amor.firebaseapp.com",

@@ -1,6 +1,7 @@
 import { randomColor } from './product-model';
 
 export interface BannerSimpleModel {
+    id: string;
     name: string;
     imageUrl: string;
     color: string;
@@ -17,6 +18,7 @@ export function mockBanner(): BannerModel {
     const imageName = Math.floor(Math.random() * 3 + 1);
 
     return {
+        id: 'products',
         name: 'any name',
         color: randomColor(),
         imageUrl: `assets/images/${imageName}.jfif`,

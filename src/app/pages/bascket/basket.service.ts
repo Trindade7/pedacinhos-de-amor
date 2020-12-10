@@ -1,7 +1,6 @@
 
 import { Injectable } from '@angular/core';
 import { DatabaseGenericService } from '@app/core/database-generic.service';
-import { BannerSimpleModel } from '@app/core/models/banner-model';
 import { ProductModel } from '@app/core/models/product-model';
 import { StoreModel } from '@app/core/models/store-generic-model';
 import { StoreGeneric } from '@app/core/store.generic';

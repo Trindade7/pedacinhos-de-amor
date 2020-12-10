@@ -1,18 +1,22 @@
 <div class="products-container flexed col center">
-  <div class="category" *ngFor="let event of events">
+  <div class="category"
+       *ngFor="let category of productsSvc.categories"
+       [id]="category.banner.id">
     <header class="category__header">
       <div class="sized-box-2"></div>
 
       <div class="banner">
-        <app-banner-simple [bannerData]="event"
+        <app-banner-simple [bannerData]="category.banner"
                            [backgroundPosition]="'left'"></app-banner-simple>
       </div>
 
       <div class="sized-box-2"></div>
     </header>
 
-    <div class="category__products">
-      <app-product-horizontal-list></app-product-horizontal-list>
+    <div class="category__products padded-x">
+      <app-product-horizontal-list
+                                   [products]="category.producsts$ | async">
+      </app-product-horizontal-list>
     </div>
   </div>
 
