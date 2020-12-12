@@ -80,6 +80,7 @@ import { ProductHorizontalListSkeletonComponent } from './components/product-hor
     ProductHorizontalListComponent,
     BannerSimpleComponent,
     GridComponent,
+    ProductSkeletonComponent,
     ProductHorizontalListSkeletonComponent
   ]
 })

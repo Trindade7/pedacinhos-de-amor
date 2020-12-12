@@ -4,111 +4,63 @@ import { DatabaseGenericService } from '@app/core/database-generic.service';
 import { ProductModel } from '@app/core/models/product-model';
 import { StoreModel } from '@app/core/models/store-generic-model';
 import { StoreGeneric } from '@app/core/store.generic';
-import { Observable, of } from 'rxjs';
+import { Observable, Observer, of } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { Logger as logger } from '@app-core/logger';
 import { ProductOrderModel } from '@app/core/models/order-model';
+import { DatabaseService } from '@app/core/database.service';
+import { watch } from 'rxjs-watcher';
+
+
+interface BasketModel {
+  itemsCount: number;
+  totalPrice: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
+  private _basketLocation = 'users/test/content';
+  private _itemsLocation = `${this._basketLocation}/basket/items`;
+
+  private _basket$: Observable<BasketModel | null>;
+  private _items$: Observable<ProductOrderModel<ProductModel>[]>;
+
   constructor (
-    private _productsDb: BasketDb,
-    private _store: basketStore
+    private _db: DatabaseService
   ) {
-    logger.startCollapsed(
-      '[basket.service] constructor',
-      ['calling this._productsDb.collection()']
+    this._basket$ = this._db.docOrNull$<BasketModel>(
+      'basket',
+      this._basketLocation
+    ).pipe(
+      watch('[basket.service] _basket$')
     );
 
-    this._productsDb.collection$().pipe(
-      take(1),
-    ).subscribe(
-      products => {
-        this._store.patch({ items: products, loading: false }, 'get collection');
-
-        logger.collapsed('[basket.service] Success this._productsDb.collection()', [products]);
-        logger.endCollapsed(['finished log']);
-      },
-      rejected => {
-        this._store.patch({ status: 'rejected', loading: false }, 'get collection');
-
-        logger.collapsed('[basket.service] Error this._productsDb.collection()', [rejected]);
-        logger.endCollapsed(['finished log']);
-      },
-      () => {
-        this._store.patch({
-          loading: false,
-        }, 'get collection');
-
-
-        logger.collapsed('[basket.service] success this._productsDb.collection()');
-        logger.endCollapsed(['finished log']);
-      }
+    this._items$ = this._db.collection$<ProductOrderModel<ProductModel>>(
+      this._itemsLocation
+    ).pipe(
+      watch('[basket.service] _items$')
     );
-  }
-
-  get loading$(): Observable<boolean> {
-    return this._store.loading$;
-  }
-
-  get status$(): Observable<string> {
-    return this._store.status$;
-  }
-
-  get error$(): Observable<Error | null> {
-    return this._store.error$;
   }
 
   get items$(): Observable<ProductOrderModel<ProductModel>[]> {
-    return this._store.items$;
+    return this._items$;
   }
 
-  addToBasket(item: ProductOrderModel<ProductModel>) {
-    logger.collapsed('[basket.service] addToBasket', [item]);
-
-    return this._store.addItem = item;
+  get basket$(): Observable<BasketModel | null> {
+    return this._basket$;
   }
 
-}
-
-
-// *################## Db Service ###################
-
-@Injectable({ providedIn: 'root' })
-class BasketDb extends DatabaseGenericService<ProductOrderModel<ProductModel>>{
-  basePath = 'basket';
-}
-
-
-// *################## Store ###################
-interface IViewConversationPage extends StoreModel {
-  items: ProductOrderModel<ProductModel>[];
-}
-
-@Injectable({ providedIn: 'root' })
-class basketStore extends StoreGeneric<IViewConversationPage>{
-  protected store = 'basket-store';
-
-  constructor () {
-    super({
-      loading: true,
-      error: null,
-      status: ''
-    });
-  }
-
-  get items$(): Observable<ProductOrderModel<ProductModel>[]> {
-    return this.state$.pipe(
-      map(state => state.loading ? [] : state.items)
+  add(item: ProductOrderModel<ProductModel>): Promise<void> {
+    return this._db.create<ProductOrderModel<ProductModel>>(
+      item,
+      this._itemsLocation,
+      item.product.id
     );
   }
 
-  set addItem(item: ProductOrderModel<ProductModel>) {
-    const items = [...this.state.items, item];
-    this.patch({
-      items
-    }, 'addItem');
+  delte(id: string): Promise<void> {
+    return this._db.delete(id, this._itemsLocation);
   }
 }

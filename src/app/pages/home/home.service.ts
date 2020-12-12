@@ -9,6 +9,7 @@ import { Logger as logger } from '@app-core/logger';
 import { DatabaseService } from '@app/core/database.service';
 import { watch } from 'rxjs-watcher';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { BasketService } from '../bascket/basket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -47,10 +48,11 @@ export class HomeService {
     },
   ];
 
-  _products$: Observable<any[]>;
+  private _products$: Observable<any[]>;
 
   constructor (
     private _dBSvc: DatabaseService,
+    private _basketSvc: BasketService
   ) {
     this._products$ = this._dBSvc.collection$<ProductModel>(
       'products',
@@ -69,8 +71,13 @@ export class HomeService {
     return this._events;
   }
 
-  addToBascket(prod: ProductModel) {
-    console.log(prod);
+  addToBascket(product: ProductModel) {
+    console.log(product);
+    this._basketSvc.add({
+      product,
+      details: '',
+      quantity: 1
+    });
   }
 
 }

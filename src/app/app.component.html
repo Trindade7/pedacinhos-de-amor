@@ -23,6 +23,9 @@
         <nz-space-item>
           <button routerLink="/basket" aria-label="basket" nz-button nzType="primary" nzSize="medium" nzShape="circle">
             <i class="trigger" nz-icon nzType="shopping" nzTheme="outline"></i>
+            <span *ngIf="basket.basket$ | async as basket">
+              {{ basket?.itemsCount }}
+            </span>
           </button>
         </nz-space-item>
       </nz-space>

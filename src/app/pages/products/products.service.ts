@@ -76,7 +76,6 @@ export class ProductsService {
           'products',
           {
             limit: 8,
-            orderBy: category.banner.id
           }
         )
           .pipe(

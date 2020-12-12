@@ -21,40 +21,78 @@
       <div class="sized-box-2"></div>
     </div>
 
-    <div class="purchase" nz-row [nzGutter]="24">
-      <div class="item" *ngFor="let product of [1,2,3]"
-           nz-col
-           nzXs="24"
-           nzSm="12">
-        <div class="flexed">
-          <app-product></app-product>
-
-          <span class="spacer"></span>
-
-          <div class="summary flexed col center">
-            <section class="quantity">
-              <label for="quantity">
-                <h3>Quantidade</h3>
-              </label>
-              <nz-input-number id="quantity"
-                               [(ngModel)]="order.quantity"
-                               [nzMin]="1"
-                               [nzMax]="50"
-                               [nzStep]="1"></nz-input-number>
-            </section>
-
-            <h3 class="padded-y">{{order.product.price * order.quantity | currency: 'Kzs '}}</h3>
+    <ng-container *ngIf="basketSvc.items$ | async as items; else loadingItemsTemplate">
+      <div class="purchase" nz-row [nzGutter]="24">
+        <div class="item" *ngFor="let product of [1,2,3]"
+             nz-col
+             nzXs="24"
+             nzSm="12">
+          <div class="flexed">
+            <div *ngFor="let item of items" class="product-container">
+              <app-product [product]="item"
+                           [actionButtonEvent]="basketSvc.add(product)"></app-product>
+            </div>
 
             <span class="spacer"></span>
 
-            <button nz-button nzType="danger" nzGhost>
-              <i nz-icon nzType="delete" nzTheme="fill"></i>
-              Remover
-            </button>
+            <div class="summary flexed col center">
+              <section class="quantity">
+                <label for="quantity">
+                  <h3>Quantidade</h3>
+                </label>
+                <nz-input-number id="quantity"
+                                 [(ngModel)]="order.quantity"
+                                 [nzMin]="1"
+                                 [nzMax]="50"
+                                 [nzStep]="1"></nz-input-number>
+              </section>
+
+              <h3 class="padded-y">{{order.product.price * order.quantity | currency: 'Kzs '}}</h3>
+
+              <span class="spacer"></span>
+
+              <button nz-button nzType="danger" nzGhost>
+                <i nz-icon nzType="delete" nzTheme="fill"></i>
+                Remover
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-template #loadingItemsTemplate>
+      <div class="content-container flexed center">
+        <div class="purchase" nz-row [nzGutter]="24">
+          <div class="item" *ngFor="let product of [1,2,3]"
+               nz-col
+               nzXs="24"
+               nzSm="12">
+            <div class="flexed">
+              <app-product-skeleton></app-product-skeleton>
+
+              <span class="spacer"></span>
+
+              <div class="summary flexed col center">
+                <section class="quantity">
+                  <label for="quantity">
+                    <h3>...</h3>
+                  </label>
+                </section>
+
+                <h3 class="padded-y">00.00</h3>
+
+                <span class="spacer"></span>
+
+                <button nz-button nzType="danger" nzGhost>
+                  <i nz-icon nzType="delete" nzTheme="fill"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    </ng-template>
 
   </section>
 </div>
