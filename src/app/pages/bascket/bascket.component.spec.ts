@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BascketComponent } from './bascket.component';
+import {BascketComponent} from './bascket.component';
 
 describe('BascketComponent', () => {
   let component: BascketComponent;
@@ -8,9 +8,8 @@ describe('BascketComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BascketComponent ]
-    })
-    .compileComponents();
+      declarations: [BascketComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

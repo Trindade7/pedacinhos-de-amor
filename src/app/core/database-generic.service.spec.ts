@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { DatabaseGenericService } from './database-generic.service';
+import {DatabaseGenericService} from './database-generic.service';
 
 describe('DatabaseGenericService', () => {
   let service: DatabaseGenericService;

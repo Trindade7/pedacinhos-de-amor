@@ -62,17 +62,18 @@
     <div class="sized-box-2"></div>
 
     <div class="extras flexed wrap">
-      <nz-card id="order-options" class="container order-options" nzTitle="Mais opções">
+      <nz-card id="order-options"
+               class="container order-options"
+               nzTitle="Mais opções">
         <div class="order-details">
           <textarea #orderDetails
                     [(ngModel)]="details"
                     nz-input
-                    [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+                    [nzAutosize]="{ minRows: 5, maxRows: 7 }"
                     minlength="10"
                     maxlength="300"
                     placeholder="Pedido personalizado? Escreva o que deseja aqui..."
-                    aria-label="order customizations">
-                  </textarea>
+                    aria-label="order customizations"> </textarea>
 
           <div class="sized-box"></div>
 
@@ -86,7 +87,7 @@
         </div>
       </nz-card>
 
-      <nz-card class="container comments" nzTitle="Comentários">
+      <nz-card class="container comments card-head-padding-sm" nzTitle="Comentários">
         <div class="flexed center">
           <h2>Opções de commmentários em breve!</h2>
         </div>
@@ -126,7 +127,6 @@
                                [nzActive]="true"
                                [nzSize]="'small'"
                                style="width:100%"></nz-skeleton-element>
-
 
           <nz-skeleton-element nzType="input"
                                [nzActive]="true"

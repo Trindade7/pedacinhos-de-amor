@@ -4,61 +4,82 @@
       <h1>Productos no seu cesto</h1>
     </header>
 
-    <div class="purchase">
-      <div class="flexed col center">
-        <span class="spancer"></span>
-
-        <h1>Ainda não tem productos no seu cesto de compras</h1>
-
-        <div class="sized-box'2"></div>
-
-        <a routerLink="/products" nz-button nzType="danger">
-          Ver productos
-        </a>
-
-        <span class="spancer"></span>
-      </div>
-      <div class="sized-box-2"></div>
-    </div>
-
     <ng-container *ngIf="basketSvc.items$ | async as items; else loadingItemsTemplate">
-      <div class="purchase" nz-row [nzGutter]="24">
-        <div class="item" *ngFor="let product of [1,2,3]"
-             nz-col
-             nzXs="24"
-             nzSm="12">
-          <div class="flexed">
-            <div *ngFor="let item of items" class="product-container">
-              <app-product [product]="item"
-                           [actionButtonEvent]="basketSvc.add(product)"></app-product>
-            </div>
-
-            <span class="spacer"></span>
-
-            <div class="summary flexed col center">
-              <section class="quantity">
-                <label for="quantity">
-                  <h3>Quantidade</h3>
-                </label>
-                <nz-input-number id="quantity"
-                                 [(ngModel)]="order.quantity"
-                                 [nzMin]="1"
-                                 [nzMax]="50"
-                                 [nzStep]="1"></nz-input-number>
-              </section>
-
-              <h3 class="padded-y">{{order.product.price * order.quantity | currency: 'Kzs '}}</h3>
+      <ng-container *ngIf="items.length; else emptyBasketTemplate">
+        <div class="purchase" nz-row [nzGutter]="24">
+          <div class="item" *ngFor="let item of items"
+               nz-col
+               nzXs="24"
+               nzSm="12">
+            <div class="flexed">
+              <div class="product-container">
+                <app-product [product]="item.product"
+                             [showActionButton]="false">
+                </app-product>
+              </div>
 
               <span class="spacer"></span>
 
-              <button nz-button nzType="danger" nzGhost>
-                <i nz-icon nzType="delete" nzTheme="fill"></i>
-                Remover
-              </button>
+              <div class="summary flexed col center">
+                <section class="quantity">
+                  <label for="quantity">
+                    <h3>Quantidade</h3>
+                  </label>
+
+                  <nz-input-number (ngModelChange)="addUnsaved(item.product.id)"
+                                   [(ngModel)]="item.quantity"
+                                   id="quantity"
+                                   [nzMin]="1"
+                                   [nzMax]="50"
+                                   [nzStep]="1">
+                  </nz-input-number>
+                </section>
+
+                <h3 class="padded-y">{{item.product.price * item.quantity | currency: 'Kzs '}}</h3>
+
+                <span class="spacer"></span>
+
+                <button (click)="updateItem(item)"
+                        *ngIf="unsavedChanges.includes(item.product.id)"
+                        nz-button
+                        nzType="accent">
+                  <i nz-icon nzType="save" nzTheme="fill"></i>
+                  Atualizar
+                </button>
+
+                <div class="sized-box-05"></div>
+
+                <button (click)="basketSvc.delete(item.product.id)"
+                        nz-button
+                        nzType="danger"
+                        nzGhost>
+                  <i nz-icon nzType="delete" nzTheme="fill"></i>
+                  Remover
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-template #emptyBasketTemplate>
+        <div class="purchase">
+          <div class="flexed col center">
+            <span class="spancer"></span>
+
+            <h1>Ainda não tem productos no seu cesto de compras</h1>
+
+            <div class="sized-box'2"></div>
+
+            <a routerLink="/products" nz-button nzType="danger">
+              Ver productos
+            </a>
+
+            <span class="spancer"></span>
+          </div>
+          <div class="sized-box-2"></div>
+        </div>
+      </ng-template>
+
     </ng-container>
     <ng-template #loadingItemsTemplate>
       <div class="content-container flexed center">
@@ -93,6 +114,5 @@
       </div>
       <br>
     </ng-template>
-
   </section>
 </div>

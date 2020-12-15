@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BannerSimpleComponent } from './banner-simple.component';
+import {BannerSimpleComponent} from './banner-simple.component';
 
 describe('BannerSimpleComponent', () => {
   let component: BannerSimpleComponent;
@@ -8,9 +8,8 @@ describe('BannerSimpleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BannerSimpleComponent ]
-    })
-    .compileComponents();
+      declarations: [BannerSimpleComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

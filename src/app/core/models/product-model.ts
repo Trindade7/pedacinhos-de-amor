@@ -1,54 +1,53 @@
 export interface ProductModel {
-    id: string;
-    name: string;
-    description: string;
-    imageUrl: string;
-    price: number;
-    discount: number;
-    averageReview: number;
-    color: string;
-    createdAt?: Date;
-    totalComments?: number;
-    category?: string;
-    tags?: string[];
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  price: number;
+  discount: number;
+  averageReview: number;
+  color: string;
+  createdAt?: Date;
+  totalComments?: number;
+  category?: string;
+  tags?: string[];
 }
 
 export function newProduct(product: ProductModel): ProductModel {
-    return product;
+  return product;
 }
 export function mockProduct(): ProductModel {
-
-    return {
-        id: 'testId',
-        name: 'any name',
-        averageReview: 4,
-        price: 300,
-        discount: 20,
-        totalComments: 65,
-        color: randomColor(),
-        imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
-        description: `Ad laborum tempor magna ut amet veniam officia
+  return {
+    id: 'testId',
+    name: 'any name',
+    averageReview: 4,
+    price: 300,
+    discount: 20,
+    totalComments: 65,
+    color: randomColor(),
+    imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
+    description: `Ad laborum tempor magna ut amet veniam officia
         pariatur qui consectetur nostrud culpa non reprehenderit.`,
-        category: 'products',
-        tags: ['online', 'test', 'tags'],
-    };
+    category: 'products',
+    tags: ['online', 'test', 'tags'],
+  };
 }
 
 export function randomColor(): string {
-    const colorIndex = Math.floor(Math.random() * PLACEHOLDER_COLORS.length);
+  const colorIndex = Math.floor(Math.random() * PLACEHOLDER_COLORS.length);
 
-    return PLACEHOLDER_COLORS[colorIndex];
+  return PLACEHOLDER_COLORS[colorIndex];
 }
 
 const PLACEHOLDER_COLORS = [
-    '#176ba3',
-    '#ffa1a1b2',
-    '#e7e7e7',
-    '#ffa1a1b2',
-    '#ffa1a1b2',
-    '#ff6e6eb2',
-    '#ff6e6eb2',
-    '#15202b',
-    '#ff3b3bb2',
-    '#ffa1a1b2'
+  '#176ba3',
+  '#ffa1a1b2',
+  '#e7e7e7',
+  '#ffa1a1b2',
+  '#ffa1a1b2',
+  '#ff6e6eb2',
+  '#ff6e6eb2',
+  '#15202b',
+  '#ff3b3bb2',
+  '#ffa1a1b2',
 ];

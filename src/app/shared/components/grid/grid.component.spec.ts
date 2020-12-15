@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GridComponent } from './grid.component';
+import {GridComponent} from './grid.component';
 
 describe('GridComponent', () => {
   let component: GridComponent;
@@ -8,9 +8,8 @@ describe('GridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GridComponent ]
-    })
-    .compileComponents();
+      declarations: [GridComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

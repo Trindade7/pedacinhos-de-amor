@@ -21,14 +21,16 @@
 
       <nz-space>
         <nz-space-item>
-          <button routerLink="/basket" aria-label="basket" nz-button nzType="primary" nzSize="medium" nzShape="circle">
-            <i class="trigger" nz-icon nzType="shopping" nzTheme="outline"></i>
-            <span *ngIf="basket.basket$ | async as basket">
-              {{ basket?.itemsCount }}
-            </span>
-          </button>
+          <nz-badge [nzCount]="basket.totalItems$ | async">
+            <button routerLink="/basket" aria-label="basket" nz-button nzType="primary" nzSize="medium"
+                    nzShape="circle">
+              <i class="trigger" nz-icon nzType="shopping" nzTheme="outline"></i>
+            </button>
+          </nz-badge>
         </nz-space-item>
       </nz-space>
+
+      <div class="sized-box-05"></div>
 
       <button (click)="toggleNavbar()" aria-label="app-menu" nz-button nzType="default" nzSize="large" nzShape="circle">
         <i class="trigger"
@@ -148,9 +150,9 @@
       <div class="sized-box-2"></div>
 
       <ul class="contact-list" nz-menu nzMode="inline" class="sider-menu">
-        <li nz-menu-item nzSelected>Home</li>
-        <li nz-menu-item nzSelected>Todos productos</li>
-        <li nz-menu-item>Fale conosco</li>
+        <li routerLink="/" nz-menu-item nzSelected>Home</li>
+        <li routerLink="/products" nz-menu-item nzSelected>Todos productos</li>
+        <li routerLink nz-menu-item>Fale conosco</li>
       </ul>
 
       <div class="sized-box-4"></div>

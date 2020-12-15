@@ -1,19 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
   selector: 'app-product-skeleton',
   templateUrl: './product-skeleton.component.html',
   styleUrls: ['./product-skeleton.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductSkeletonComponent implements OnInit {
   buttonActive = false;
   avatarActive = false;
   inputActive = false;
   imageActive = true;
-  constructor () { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
