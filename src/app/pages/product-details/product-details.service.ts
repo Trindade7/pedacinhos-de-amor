@@ -1,18 +1,17 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DatabaseService} from '@app/core/database.service';
-import {BannerSimpleModel} from '@app/core/models/banner-model';
 import {ProductModel} from '@app/core/models/product-model';
 import {Observable} from 'rxjs';
 import {watch} from 'rxjs-watcher';
-import {take, delay, switchMap, tap} from 'rxjs/operators';
+import {delay, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductDetailsService {
   private _product$!: Observable<ProductModel | null>;
-  private _id!: any;
+  private _id!: string;
 
   constructor(
     private _dBSvc: DatabaseService,

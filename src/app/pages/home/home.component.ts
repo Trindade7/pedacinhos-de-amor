@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+
 import {HomeService} from './home.service';
 
 @Component({

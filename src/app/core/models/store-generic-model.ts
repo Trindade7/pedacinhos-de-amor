@@ -11,8 +11,8 @@ export interface QueryOptionsModel {
   limitTo: number;
   arrayContains?: {
     arrayName: string;
-    value: any;
+    value: unknown;
   };
   path: string | null;
-  startAt?: any;
+  startAt?: unknown;
 }

@@ -1,12 +1,9 @@
-import {Inject, Injectable} from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
-import {Logger as logger} from '@app-core/logger';
+import { Inject, Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Logger as logger } from '@app-core/logger';
 import firebase from 'firebase/app';
-import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 export interface QueryOptions {
   limitToLast: number;
@@ -34,7 +31,7 @@ export class DatabaseGenericService<T> {
 
   protected basePath = '';
 
-  constructor(@Inject(AngularFirestore) private _firestore: AngularFirestore) {}
+  constructor (@Inject(AngularFirestore) private _firestore: AngularFirestore) { }
   private _collection(
     path: string = this.basePath
   ): AngularFirestoreCollection<T> {
@@ -95,7 +92,7 @@ export class DatabaseGenericService<T> {
 
         return query;
       })
-      .valueChanges({idField: 'id'})
+      .valueChanges({ idField: 'id' })
       .pipe(
         tap(
           // LOGGING DATA
@@ -133,7 +130,7 @@ export class DatabaseGenericService<T> {
         //   return query;
         // }
       )
-      .valueChanges({idField: 'id'})
+      .valueChanges({ idField: 'id' })
       .pipe(
         tap(res =>
           logger.collapsed('[database-generic.service] collection()', [
@@ -147,7 +144,7 @@ export class DatabaseGenericService<T> {
 
   docOrNull$(id: string): Observable<T | null> {
     logger.startCollapsed('[database-generic.service] [docOrNull$()]', [
-      {log: ['id:', id], type: 'warn'},
+      { log: ['id:', id], type: 'warn' },
     ]);
 
     const path = `${this.basePath}/${id}`;
@@ -194,7 +191,7 @@ export class DatabaseGenericService<T> {
           ...document,
           createdAt: this.getServerTimeStamp(),
         },
-        {merge: true}
+        { merge: true }
       );
   }
 

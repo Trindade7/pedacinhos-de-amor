@@ -1,9 +1,5 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
-import {
-  BannerModel,
-  BannerSimpleModel,
-  mockBanner,
-} from '@app/core/models/banner-model';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {BannerSimpleModel, mockBanner} from '@app/core/models/banner-model';
 
 type BackgroundPosition = 'center' | 'left' | 'right';
 

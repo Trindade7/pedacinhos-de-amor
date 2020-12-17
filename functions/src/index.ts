@@ -1,29 +1,51 @@
+import * as fbAdmin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import * as fbAdmin } from "firebase-admin";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
-// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
+fbAdmin.initializeApp();
 
-// const admin = fbAdmin.initializeApp();
+exports.countBasketTotals = functions.firestore
+    .document('/users/{usetId}/content/basket/items/{itemId}').onWrite(
+        async (change, context) => {
+            const basketRef = change.after.ref.parent.parent;
+            const quantityFieldName = 'quantity';
 
-export const makeUppercase = functions.firestore.document('/messages/{documentId}')
-    .onCreate((snap, context) => {
-        // Grab the current value of what was written to Cloud Firestore.
-        const original = snap.data().original;
+            if (!basketRef) {
+                console.log('No basket reference');
+                return;
+            }
 
-        // Access the parameter `{documentId}` with `context.params`
-        functions.logger.log('Uppercasing', context.params.documentId, original);
+            let quantityIncrement: number;
 
-        const uppercase = original.toUpperCase();
+            if (change.after.exists && !change.before.exists) { //on create
+                console.log('Adding', change.after?.data());
 
-        // You must return a Promise when performing asynchronous tasks inside a Functions such as
-        // writing to Cloud Firestore.
-        // Setting an 'uppercase' field in Cloud Firestore document returns a Promise.
-        return snap.ref.set({ uppercase }, { merge: true });
-    });
+                const item = { ...change.after?.data() };
+                quantityIncrement = Math.abs(item[quantityFieldName]);
+            }
+            else if (!change.after.exists && change.before.exists) { //on delete
+                console.log('Adding', change.after?.data());
+                const item = { ...change.before?.data() };
+                quantityIncrement = - Math.abs(item[quantityFieldName]);
+            }
+            else { //on update
+                console.log('Adding', change.after?.data());
+                const quantityBefore = { ...change.before?.data() }[quantityFieldName];
+                const quantityAfter = { ...change.after?.data() }[quantityFieldName];
+
+                quantityIncrement = quantityAfter - quantityBefore;
+            }
+
+            // Return the promise from countRef.transaction() so our function
+            // waits for this async event to complete before it exits.
+            const currentBasket = (await basketRef.get()).data() ?? { totalQuantity: 0, totalPrice: 0 };
+            currentBasket['totalQuantity'] = (currentBasket['totalQuantity'] ?? 0) + quantityIncrement;
+
+            await basketRef.set(currentBasket, { merge: true });
+
+            console.log(
+                'Counters updated. added =>\n',
+                { quantityIncrement },
+                { currentBasket }
+            );
+            return null;
+        });

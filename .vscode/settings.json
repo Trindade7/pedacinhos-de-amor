@@ -2,9 +2,11 @@
   "editor.formatOnSave": true,
   "tslint.autoFixOnSave": true,
   "eslint.options": {
-    "extensions": [".ts", ".html"]
+    "extensions": [
+      ".ts",
+      ".html"
+    ]
   },
-
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -12,7 +14,6 @@
     "typescriptreact",
     "html"
   ],
-
   "peacock.color": "#FF6E6Eb2",
   "notebook.kernelProviderAssociations": [],
   "workbench.colorCustomizations": {
@@ -32,5 +33,6 @@
     "statusBarItem.hoverBackground": "#ff3b3bb2",
     "tab.activeBorder": "#ffa1a1b2"
   },
-  "html.format.endWithNewline": true
+  "html.format.endWithNewline": true,
+  "files.exclude": {}
 }

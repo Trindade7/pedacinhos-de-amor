@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {mockOrder, ProductOrderModel} from '@app/core/models/order-model';
-import {mockProduct, ProductModel} from '@app/core/models/product-model';
+import {ProductModel} from '@app/core/models/product-model';
+
 import {BasketService} from './basket.service';
 
 @Component({

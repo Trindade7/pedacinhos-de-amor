@@ -18,19 +18,116 @@ export function newProduct(product: ProductModel): ProductModel {
 }
 export function mockProduct(): ProductModel {
   return {
-    id: 'testId',
-    name: 'any name',
-    averageReview: 4,
-    price: 300,
-    discount: 20,
-    totalComments: 65,
+    id: randomString(1),
+    name: randomString(),
+    averageReview: Math.random() * 5,
+    price: Math.random() * 100000,
+    discount: Math.random() * (100000 * 0.9),
+    totalComments: Math.random() * 365,
     color: randomColor(),
     imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
-    description: `Ad laborum tempor magna ut amet veniam officia
-        pariatur qui consectetur nostrud culpa non reprehenderit.`,
+    description: randomString(100),
     category: 'products',
-    tags: ['online', 'test', 'tags'],
+    tags: [randomString(1), randomString(1), randomString(1)],
   };
+}
+
+
+function randomString(maxWords = 4, separator = ' '): string {
+  const words = [
+    'Ad',
+    'laborum',
+    'tempor',
+    'magna',
+    'ut',
+    'amet',
+    'veniam',
+    ',',
+    'officia',
+    'pariatur',
+    'qui',
+    'consectetur',
+    'nostrud',
+    'culpa',
+    'reprehenderit',
+    'non',
+    'tempor',
+    ',',
+    'est',
+    'irure',
+    'officia',
+    'Lorem',
+    'officia',
+    'Adipisicing',
+    ',',
+    'cupidatat',
+    'dolor',
+    'sunt',
+    'Lorem',
+    'incididunt',
+    'non',
+    'proident', '.',
+    'non',
+    'sunt',
+    'excepteur',
+    'est',
+    'aute',
+    'anim', '.',
+    'Ex',
+    'aliqua',
+    'tempor',
+    ',',
+    'aute',
+    'qui',
+    'velit',
+    'Proident',
+    'velit',
+    'et',
+    'ea',
+    'do',
+    'cillum',
+    'consectetur',
+    'duis',
+    'labore',
+    'velit',
+    'Sunt',
+    'tempor',
+    'dolore',
+    'ullamco',
+    ',',
+    'ex',
+    'consectetur',
+    'excepteur',
+    'consectetur',
+    'commodo',
+    'cupidatat',
+    'proident',
+    'est',
+    'Officia',
+    'elit',
+    'minim',
+    'elit',
+    ',',
+    'voluptate',
+    'deserunt',
+    'in',
+    'do',
+    'proident',
+    'qui',
+    'do',
+    'ullamco',
+    '.',
+  ];
+
+  const newPhrase = [];
+  const phraseSize = Math.floor(Math.random() * maxWords);
+
+  for (let i = 0; i < phraseSize; i++) {
+    const word = Math.floor(Math.random() * words.length);
+    newPhrase.push(word);
+  }
+
+  return newPhrase.join(separator);
 }
 
 export function randomColor(): string {

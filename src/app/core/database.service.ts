@@ -33,7 +33,6 @@ export class DatabaseService {
 
   constructor (private _firestore: AngularFirestore) { }
 
-
   private get _getServerTimeStamp(): unknown {
     // return firebase.default.firestore.FieldValue.serverTimestamp();
     return firebase.firestore.FieldValue.serverTimestamp();
@@ -98,7 +97,7 @@ export class DatabaseService {
       .pipe(
         watch('[database.service] collection$()', 2),
         tap(val =>
-          logger.collapsed('[home.service] products() tap val =>\n', [val])
+          logger.collapsed('[database.service] products() tap val =>\n', [val])
         )
       );
   }
@@ -251,8 +250,8 @@ export class DatabaseService {
       const docRef = this._firestore.doc(batchDoc.path).ref;
 
       batchDoc.update
-        ? batch.update(docRef, { ...batchDoc.doc })
-        : batch.set(docRef, { ...batchDoc.doc });
+        ? batch.update(docRef, { ...batchDoc.doc as any })
+        : batch.set(docRef, { ...batchDoc.doc as any });
     }
 
     return batch

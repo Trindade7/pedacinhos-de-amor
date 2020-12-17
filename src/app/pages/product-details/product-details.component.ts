@@ -1,15 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  NavigationStart,
-  Route,
-  Router,
-  RouterState,
-} from '@angular/router';
-import {ProductOrderModel} from '@app/core/models/order-model';
-import {mockProduct, ProductModel} from '@app/core/models/product-model';
+
 import {ProductDetailsService} from './product-details.service';
 
 @Component({

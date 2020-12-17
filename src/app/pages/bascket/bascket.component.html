@@ -2,6 +2,12 @@
   <section class="container padded">
     <header class="padded-2-y" nzTypography>
       <h1>Productos no seu cesto</h1>
+      <button (click)="basketSvc.genMock()"
+              nz-button
+              nzType="accent">
+        <i nz-icon nzType="test" nzTheme="fill"></i>
+        gen mock
+      </button>
     </header>
 
     <ng-container *ngIf="basketSvc.items$ | async as items; else loadingItemsTemplate">
