@@ -22,6 +22,7 @@ import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.compo
 import {ProductDetailsComponent} from './pages/product-details/product-details.component';
 import {ProductsComponent} from './pages/products/products.component';
 import {SharedModule} from './shared/shared.module';
+import { UserComponent } from './pages/user/user.component';
 
 // import pt from '@angular/common/locales/pt';
 registerLocaleData(pt);
@@ -33,6 +34,7 @@ registerLocaleData(pt);
     ProductDetailsComponent,
     ProductsComponent,
     BascketComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
