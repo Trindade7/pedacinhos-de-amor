@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProductHorizontalListSkeletonComponent } from './product-horizontal-list-skeleton.component';
+import {ProductHorizontalListSkeletonComponent} from './product-horizontal-list-skeleton.component';
 
 describe('ProductHorizontalListSkeletonComponent', () => {
   let component: ProductHorizontalListSkeletonComponent;
@@ -8,9 +8,8 @@ describe('ProductHorizontalListSkeletonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductHorizontalListSkeletonComponent ]
-    })
-    .compileComponents();
+      declarations: [ProductHorizontalListSkeletonComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,50 +1,150 @@
 export interface ProductModel {
-    id: string;
-    name: string;
-    description: string;
-    imageUrl: string;
-    price: number;
-    discount: number;
-    averageReview: number;
-    totalComments?: number;
-    color: string;
-    createdAt?: Date;
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  price: number;
+  discount: number;
+  averageReview: number;
+  color: string;
+  createdAt?: Date;
+  totalComments?: number;
+  category?: string;
+  tags?: string[];
 }
 
 export function newProduct(product: ProductModel): ProductModel {
-    return product;
+  return product;
 }
 export function mockProduct(): ProductModel {
+  return {
+    id: randomString(1),
+    name: randomString(),
+    averageReview: Math.random() * 5,
+    price: Math.random() * 100000,
+    discount: Math.random() * (100000 * 0.9),
+    totalComments: Math.random() * 365,
+    color: randomColor(),
+    imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
+    description: randomString(100),
+    category: 'products',
+    tags: [randomString(1), randomString(1), randomString(1)],
+  };
+}
 
-    return {
-        id: 'testId',
-        name: 'any name',
-        averageReview: 4,
-        price: 300,
-        discount: 20,
-        totalComments: 65,
-        color: randomColor(),
-        imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
-        description: `Ad laborum tempor magna ut amet veniam officia
-        pariatur qui consectetur nostrud culpa non reprehenderit.`,
-    };
+
+function randomString(maxWords = 4, separator = ' '): string {
+  const words = [
+    'Ad',
+    'laborum',
+    'tempor',
+    'magna',
+    'ut',
+    'amet',
+    'veniam',
+    ',',
+    'officia',
+    'pariatur',
+    'qui',
+    'consectetur',
+    'nostrud',
+    'culpa',
+    'reprehenderit',
+    'non',
+    'tempor',
+    ',',
+    'est',
+    'irure',
+    'officia',
+    'Lorem',
+    'officia',
+    'Adipisicing',
+    ',',
+    'cupidatat',
+    'dolor',
+    'sunt',
+    'Lorem',
+    'incididunt',
+    'non',
+    'proident', '.',
+    'non',
+    'sunt',
+    'excepteur',
+    'est',
+    'aute',
+    'anim', '.',
+    'Ex',
+    'aliqua',
+    'tempor',
+    ',',
+    'aute',
+    'qui',
+    'velit',
+    'Proident',
+    'velit',
+    'et',
+    'ea',
+    'do',
+    'cillum',
+    'consectetur',
+    'duis',
+    'labore',
+    'velit',
+    'Sunt',
+    'tempor',
+    'dolore',
+    'ullamco',
+    ',',
+    'ex',
+    'consectetur',
+    'excepteur',
+    'consectetur',
+    'commodo',
+    'cupidatat',
+    'proident',
+    'est',
+    'Officia',
+    'elit',
+    'minim',
+    'elit',
+    ',',
+    'voluptate',
+    'deserunt',
+    'in',
+    'do',
+    'proident',
+    'qui',
+    'do',
+    'ullamco',
+    '.',
+  ];
+
+  const newPhrase = [];
+  const phraseSize = Math.floor(Math.random() * maxWords);
+
+  for (let i = 0; i < phraseSize; i++) {
+    const word = Math.floor(Math.random() * words.length);
+    newPhrase.push(word);
+  }
+
+  return newPhrase.join(separator);
 }
 
 export function randomColor(): string {
-    const colorIndex = Math.floor(Math.random() * PLACEHOLDER_COLORS.length);
+  const colorIndex = Math.floor(Math.random() * PLACEHOLDER_COLORS.length);
 
-    return PLACEHOLDER_COLORS[colorIndex];
+  return PLACEHOLDER_COLORS[colorIndex];
 }
 
 const PLACEHOLDER_COLORS = [
-    '#176ba3',
-    '#ffa1a1b2',
-    '#e7e7e7',
-    '#ffa1a1b2',
-    '#ffa1a1b2',
-    '#ff6e6eb2',
-    '#ff6e6eb2',
-    '#15202b',
-    '#ff3b3bb2',
-    '#ffa1a1b2'
+  '#176ba3',
+  '#ffa1a1b2',
+  '#e7e7e7',
+  '#ffa1a1b2',
+  '#ffa1a1b2',
+  '#ff6e6eb2',
+  '#ff6e6eb2',
+  '#15202b',
+  '#ff3b3bb2',
+  '#ffa1a1b2',
 ];
