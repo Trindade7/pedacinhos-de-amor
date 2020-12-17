@@ -3,6 +3,7 @@ import * as functions from 'firebase-functions';
 
 fbAdmin.initializeApp();
 
+// TODO: Write tests, specially for nagative numbers
 exports.countBasketTotals = functions.firestore
     .document('/users/{usetId}/content/basket/items/{itemId}').onWrite(
         async (change, context) => {
