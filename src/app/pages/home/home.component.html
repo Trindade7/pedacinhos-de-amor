@@ -34,7 +34,7 @@
                *ngFor="let event of homeSvc.events"
                nz-col nzXs="12"
                nzSm="8">
-            <app-banner-simple [bannerData]="event"></app-banner-simple>
+            <app-banner-simple routerLink="/products" [bannerData]="event"></app-banner-simple>
           </div>
         </div>
       </div>

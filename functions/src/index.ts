@@ -39,7 +39,7 @@ exports.countBasketTotals = functions.firestore
             // Return the promise from countRef.transaction() so our function
             // waits for this async event to complete before it exits.
             const currentBasket = (await basketRef.get()).data() ?? { totalQuantity: 0, totalPrice: 0 };
-            currentBasket['totalQuantity'] = (currentBasket['totalQuantity'] ?? 0) + quantityIncrement;
+            currentBasket['totalItems'] = (currentBasket['totalItems'] ?? 0) + quantityIncrement;
 
             await basketRef.set(currentBasket, { merge: true });
 

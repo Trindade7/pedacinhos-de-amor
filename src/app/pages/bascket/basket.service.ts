@@ -34,6 +34,7 @@ export class BasketService {
       .pipe(watch('[basket.service] _basket$'));
 
     this._totalItems$ = this._basket$.pipe(
+      tap(val => console.log({ val })),
       map(basket => basket?.totalItems ?? null),
       tap(val => console.log({ val })),
       watch('[basket.service] _itemsCount$ sub')

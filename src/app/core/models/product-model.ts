@@ -123,8 +123,8 @@ function randomString(maxWords = 4, separator = ' '): string {
   const phraseSize = Math.floor(Math.random() * maxWords);
 
   for (let i = 0; i < phraseSize; i++) {
-    const word = Math.floor(Math.random() * words.length);
-    newPhrase.push(word);
+    const wordIndex = Math.floor(Math.random() * words.length);
+    newPhrase.push(words[wordIndex]);
   }
 
   return newPhrase.join(separator);
