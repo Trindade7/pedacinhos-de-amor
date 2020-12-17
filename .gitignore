@@ -47,7 +47,9 @@ testem.log
 Thumbs.db
 
 
-# FIREBASE CLOUD FUNCTIONS
+# * FIREBASE
+firestore-debug.log
+#CLOUD FUNCTIONS
 # Compiled JavaScript files
 **/*.js
 **/*.js.map
