@@ -1,31 +1,35 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {BannerComponent} from './components/banner/banner.component';
-import {ProductComponent} from './components/product/product.component';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { IconsProviderModule } from '@app/icons-provider.module';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
-import {NzTypographyModule} from 'ng-zorro-antd/typography';
-import {NzInputModule} from 'ng-zorro-antd/input';
-import {NzButtonModule} from 'ng-zorro-antd/button';
-import {NzSpaceModule} from 'ng-zorro-antd/space';
-import {NzCarouselModule} from 'ng-zorro-antd/carousel';
-import {NzRateModule} from 'ng-zorro-antd/rate';
-import {FormsModule} from '@angular/forms';
-import {IconsProviderModule} from '@app/icons-provider.module';
-import {NzLayoutModule} from 'ng-zorro-antd/layout';
-import {NzMenuModule} from 'ng-zorro-antd/menu';
-import {ProductHorizontalListComponent} from './components/product-horizontal-list/product-horizontal-list.component';
-import {NzGridModule} from 'ng-zorro-antd/grid';
-import {BannerSimpleComponent} from './components/banner-simple/banner-simple.component';
-import {NzCardModule} from 'ng-zorro-antd/card';
-import {GridComponent} from './components/grid/grid.component';
-import {NzListModule} from 'ng-zorro-antd/list';
-import {NzResultModule} from 'ng-zorro-antd/result';
-import {AppRoutingModule} from '@app/app-routing.module';
-import {NzInputNumberModule} from 'ng-zorro-antd/input-number';
-import {NzSkeletonModule} from 'ng-zorro-antd/skeleton';
-import {ProductSkeletonComponent} from './components/product/product-skeleton/product-skeleton.component';
-import {ProductHorizontalListSkeletonComponent} from './components/product-horizontal-list/product-horizontal-list-skeleton/product-horizontal-list-skeleton.component';
-import {NzBadgeModule} from 'ng-zorro-antd/badge';
+import { BannerSimpleComponent } from './components/banner-simple/banner-simple.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { GridComponent } from './components/grid/grid.component';
+import {
+  ProductHorizontalListSkeletonComponent,
+} from './components/product-horizontal-list/product-horizontal-list-skeleton/product-horizontal-list-skeleton.component';
+import { ProductHorizontalListComponent } from './components/product-horizontal-list/product-horizontal-list.component';
+import { ProductSkeletonComponent } from './components/product/product-skeleton/product-skeleton.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +70,8 @@ import {NzBadgeModule} from 'ng-zorro-antd/badge';
     NzCardModule,
     NzSkeletonModule,
     NzBadgeModule,
+    NzMessageModule,
+    NzModalModule,
     // ant-design end
 
     // ##### ANTD ADDED
@@ -84,4 +90,4 @@ import {NzBadgeModule} from 'ng-zorro-antd/badge';
     ProductHorizontalListSkeletonComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

@@ -1,30 +1,26 @@
-<div class="content-container padded" nzTypography>
+<div class="content-container " nzTypography>
   <div class="ads-bar-container padded-y">
     <img src="https://placehold.it/1000x150?text=user%20avatar" alt="adverts bar">
   </div>
 
   <ng-container *ngIf="(productSvc.product$ | async) as product; else loadingTemplate">
-    <div class="product-container flexed center-x wrap">
+    <div class="product-container flexed padded center-x wrap">
       <div class="image flexed center">
         <img [src]="product.imageUrl" [alt]="product.name">
       </div>
 
-      <section class="details">
+      <section class="details flexed col">
         <h1 nzTypography class="name">{{product.name}}</h1>
 
         <div class="rating">
           <nz-rate [ngModel]="product.averageReview" nzAllowHalf nzDisabled></nz-rate>
         </div>
 
-        <p class="description">
-          {{product.description | slice:0:300}}
-        </p>
-
         <div class="order-summary">
           <div class="options flexed">
-            <section class="quantity">
-              <label for="quantity">
-                <h3>Quantidade</h3>
+            <section class="quantity flexed col">
+              <label for="quantity" class="padded-05-y">
+                Quantidade
               </label>
               <nz-input-number aria-label-="quantity" id="quantity" name="quantity"
                                [(ngModel)]="quantity"
@@ -35,26 +31,35 @@
 
             <div class="sized-box"></div>
 
-            <section class="price">
-              <h3>Preço</h3>
+            <section class="price flexed col">
+              <div class="padded-05-y">Preço</div>
               <h2>{{product.price * quantity | currency: 'Kzs '}}</h2>
             </section>
           </div>
           <div class="sized-box"></div>
-          <div class="flexed">
-            <button (click)="addToBasket()" nz-button nzType="primary">
-              <i nz-icon nzType="shopping"></i>
-              Adicionar
-            </button>
-            <div class="sized-box"></div>
-            <!-- <a fragment="order-options" -->
-            <a (click)="goToPersonalizeOrder()"
-               nz-button
-               nzType="accent">
-              personalizar encomenda
-            </a>
-            <span class="spacer"></span>
+
+          <div class="details">
+            <textarea #orderDetails
+                      [(ngModel)]="details"
+                      nz-input
+                      [nzAutosize]="{ minRows: 5, maxRows: 7 }"
+                      minlength="10"
+                      maxlength="300"
+                      placeholder="Pedido personalizado? Escreva o que deseja aqui..."
+                      aria-label="order customizations"> </textarea>
           </div>
+        </div>
+
+        <!-- <span class="spacer"></span> -->
+        <div class="sized-box"></div>
+
+        <div class="flexed">
+          <span class="spacer"></span>
+
+          <button (click)="addToBasket()" nz-button nzType="primary">
+            <i nz-icon nzType="shopping"></i>
+            Adicionar
+          </button>
         </div>
       </section>
     </div>
@@ -64,39 +69,24 @@
     <div class="extras flexed wrap">
       <nz-card id="order-options"
                class="container order-options"
-               nzTitle="Mais opções">
+               nzTitle="Detalhes">
         <div class="order-details">
-          <textarea #orderDetails
-                    [(ngModel)]="details"
-                    nz-input
-                    [nzAutosize]="{ minRows: 5, maxRows: 7 }"
-                    minlength="10"
-                    maxlength="300"
-                    placeholder="Pedido personalizado? Escreva o que deseja aqui..."
-                    aria-label="order customizations"> </textarea>
-
-          <div class="sized-box"></div>
-
-          <div class="flexed">
-            <span class="spacer"></span>
-            <button (click)="addToBasket()" nz-button nzType="primary">
-              <i nz-icon nzType="shopping"></i>
-              Adicionar
-            </button>
-          </div>
+          <p class="description">
+            {{product.description}}
+          </p>
         </div>
       </nz-card>
 
       <nz-card class="container comments card-head-padding-sm" nzTitle="Comentários">
         <div class="flexed center">
-          <h2>Opções de commmentários em breve!</h2>
+          <h2>Opções de comentários em breve!</h2>
         </div>
       </nz-card>
     </div>
   </ng-container>
 
   <ng-template #loadingTemplate>
-    <div class="product-container flexed center-x wrap">
+    <div class="product-container padded flexed center-x wrap">
       <div class="image flexed center">
         <nz-skeleton-element
                              nzType="image"

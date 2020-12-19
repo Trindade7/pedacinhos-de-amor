@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {DatabaseService} from '@app/core/database.service';
-import {ProductModel} from '@app/core/models/product-model';
-import {Observable} from 'rxjs';
-import {watch} from 'rxjs-watcher';
-import {delay, take} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DatabaseService } from '@app/core/database.service';
+import { ProductModel } from '@app/core/models/product-model';
+import { Observable } from 'rxjs';
+import { watch } from 'rxjs-watcher';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class ProductDetailsService {
   private _product$!: Observable<ProductModel | null>;
   private _id!: string;
 
-  constructor(
+  constructor (
     private _dBSvc: DatabaseService,
     private _activatedRoute: ActivatedRoute
   ) {
@@ -28,7 +28,6 @@ export class ProductDetailsService {
       .pipe(
         watch('[product-details.service] docOrNull$', 10),
         take(1),
-        delay(2000)
       );
   }
 
@@ -42,7 +41,7 @@ export class ProductDetailsService {
 
   async addToBasket(quantity: number, details: string): Promise<string> {
     const product = await this._product$.toPromise();
-    console.log({quantity, details, product});
+    console.log({ quantity, details, product });
 
     return new Promise(() => 'added');
   }

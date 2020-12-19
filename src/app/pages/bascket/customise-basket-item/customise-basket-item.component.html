@@ -1,0 +1,54 @@
+<div class="customize-container">
+    <section class="quantity">
+        <label for="quantity">
+            <span>Quantidade</span>
+            <div class="sized-box-05"></div>
+        </label>
+
+        <div class="flexed">
+            <nz-input-number aria-label-="quantity" id="quantity" name="quantity"
+                             [(ngModel)]="item.quantity"
+                             [nzDisabled]="isLoading"
+                             [nzMin]="1"
+                             [nzMax]="50"
+                             [nzStep]="1"></nz-input-number>
+
+            <h3 class="price">{{item.product.price * item.quantity | currency: 'Kzs '}}</h3>
+        </div>
+    </section>
+
+    <div class="sized-box"></div>
+
+    <section class="order-details">
+        <label for="details">
+            <span>Detalhes (Opcional)</span>
+            <div class="sized-box-05"></div>
+        </label>
+        <textarea #orderDetails
+                  [(ngModel)]="item.details"
+                  [disabled]="isLoading"
+                  nz-input
+                  [nzAutosize]="{ minRows: 5, maxRows: 7 }"
+                  minlength="10"
+                  maxlength="300"
+                  name="details"
+                  id="details"
+                  placeholder="Pedido personalizado? Escreva o que deseja aqui..."
+                  aria-label="order customizations"> </textarea>
+
+        <div class="sized-box"></div>
+    </section>
+</div>
+
+<div *nzModalFooter>
+    <button nz-button nzType="default" (click)="destroyModal()">
+        <i nz-icon nzType="close-circle" nzTheme="outline"></i>
+        cancelar
+    </button>
+    <button nz-button nzType="primary"
+            [nzLoading]="isLoading"
+            (click)="addToBasket()">
+        <i nz-icon nzType="check-circle" nzTheme="fill"></i>
+        Confirmar
+    </button>
+</div>
