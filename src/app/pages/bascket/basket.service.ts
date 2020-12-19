@@ -4,7 +4,6 @@ import { ProductOrderModel } from '@app/core/models/order-model';
 import { mockProduct, ProductModel } from '@app/core/models/product-model';
 import { Observable } from 'rxjs';
 import { watch } from 'rxjs-watcher';
-import { map, tap } from 'rxjs/operators';
 
 type BasketItemModel = ProductOrderModel<ProductModel>;
 interface BasketBatchModel {
@@ -26,19 +25,12 @@ export class BasketService {
 
   private _basket$: Observable<BasketModel | null>;
   private _items$: Observable<BasketItemModel[]>;
-  private _totalItems$: Observable<number | null>;
 
   constructor (private _db: DatabaseService) {
     this._basket$ = this._db
       .docOrNull$<BasketModel>('basket', this._basketLocation)
       .pipe(watch('[basket.service] _basket$'));
 
-    this._totalItems$ = this._basket$.pipe(
-      tap(val => console.log({ val })),
-      map(basket => basket?.totalItems ?? null),
-      tap(val => console.log({ val })),
-      watch('[basket.service] _itemsCount$ sub')
-    );
 
     this._items$ = this._db
       .collection$<BasketItemModel>(this._itemsLocation)
@@ -59,11 +51,11 @@ export class BasketService {
     return this._basket$;
   }
 
-  get totalItems$(): Observable<number | null> {
-    return this._totalItems$;
+  placeOrder() {
+    console.log('order placed');
   }
 
-  add(item: BasketItemModel, update = false): Promise<void> {
+  add(item: BasketItemModel): Promise<void> {
     return this._db.create<BasketItemModel>(
       item,
       this._itemsLocation,

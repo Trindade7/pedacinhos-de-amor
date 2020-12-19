@@ -21,7 +21,7 @@
 
       <nz-space>
         <nz-space-item>
-          <nz-badge [nzCount]="basket.totalItems$ | async">
+          <nz-badge [nzCount]="(basketSvc.basket$ | async)?.totalItems">
             <button routerLink="/basket" aria-label="basket" nz-button nzType="primary" nzSize="medium"
                     nzShape="circle">
               <i class="trigger" nz-icon nzType="shopping" nzTheme="outline"></i>

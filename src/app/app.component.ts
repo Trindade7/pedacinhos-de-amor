@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
-import {NavigationEnd, NavigationStart, Router} from '@angular/router';
-import {BasketService} from './pages/bascket/basket.service';
+import { Component } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+
+import { BasketService } from './pages/bascket/basket.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   showNavbar = false;
   loadingRoute = true;
 
-  constructor(private _router: Router, public basket: BasketService) {
+  constructor (private _router: Router, public basketSvc: BasketService) {
     this._router.events.subscribe(
       event => {
         if (event instanceof NavigationStart) {

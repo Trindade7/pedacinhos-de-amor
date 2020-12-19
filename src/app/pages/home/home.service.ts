@@ -3,7 +3,7 @@ import { DatabaseService } from '@app/core/database.service';
 import { BannerSimpleModel } from '@app/core/models/banner-model';
 import { ProductModel } from '@app/core/models/product-model';
 import { Observable } from 'rxjs';
-import { delay, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { BasketService } from '../bascket/basket.service';
 
@@ -50,7 +50,7 @@ export class HomeService {
     },
   ];
 
-  private _products$: Observable<unknown[]>;
+  private _products$: Observable<ProductModel[]>;
 
   constructor (
     private _dBSvc: DatabaseService,
@@ -60,10 +60,10 @@ export class HomeService {
       .collection$<ProductModel>('products', {
         limit: 8,
       })
-      .pipe(take(1), delay(2000));
+      .pipe(take(1));
   }
 
-  get products$(): Observable<unknown[]> {
+  get products$(): Observable<ProductModel[]> {
     return this._products$;
   }
 

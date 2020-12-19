@@ -1,10 +1,12 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {DatabaseService} from '@app/core/database.service';
-import {ProductModel} from '@app/core/models/product-model';
-import {Observable} from 'rxjs';
-import {watch} from 'rxjs-watcher';
-import {delay, take} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DatabaseService } from '@app/core/database.service';
+import { ProductModel } from '@app/core/models/product-model';
+import { Observable } from 'rxjs';
+import { watch } from 'rxjs-watcher';
+import { delay, take } from 'rxjs/operators';
+
+import { BasketService } from '../bascket/basket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +15,9 @@ export class ProductDetailsService {
   private _product$!: Observable<ProductModel | null>;
   private _id!: string;
 
-  constructor(
+  constructor (
     private _dBSvc: DatabaseService,
+    private _basketSvc: BasketService,
     private _activatedRoute: ActivatedRoute
   ) {
     console.log(
@@ -40,10 +43,19 @@ export class ProductDetailsService {
     return this._id;
   }
 
-  async addToBasket(quantity: number, details: string): Promise<string> {
+  async addToBasket(quantity: number, details: string): Promise<void> {
     const product = await this._product$.toPromise();
-    console.log({quantity, details, product});
+    console.log({ quantity, details, product });
 
-    return new Promise(() => 'added');
+    if (!product) {
+      console.log('no product');
+      return;
+    }
+
+    return this._basketSvc.add({
+      product,
+      details,
+      quantity,
+    });
   }
 }

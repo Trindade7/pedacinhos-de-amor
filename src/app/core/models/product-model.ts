@@ -18,12 +18,12 @@ export function newProduct(product: ProductModel): ProductModel {
 }
 export function mockProduct(): ProductModel {
   return {
-    id: randomString(1),
+    id: new Date().toISOString(),
     name: randomString(),
-    averageReview: Math.random() * 5,
-    price: Math.random() * 100000,
-    discount: Math.random() * (100000 * 0.9),
-    totalComments: Math.random() * 365,
+    averageReview: (Number(Math.random().toFixed(1)) * 10) / 2,
+    price: Number(Math.random().toFixed(2)) * 100000,
+    discount: Number(Math.random().toFixed(2)) * (100000 * 0.9),
+    totalComments: Math.round(Math.random() * 365),
     color: randomColor(),
     imageUrl: 'https://placehold.it/100x100?text=user%20avatar',
     description: randomString(100),
@@ -120,7 +120,7 @@ function randomString(maxWords = 4, separator = ' '): string {
   ];
 
   const newPhrase = [];
-  const phraseSize = Math.floor(Math.random() * maxWords);
+  const phraseSize = Math.round(Math.random() * maxWords);
 
   for (let i = 0; i < phraseSize; i++) {
     const wordIndex = Math.floor(Math.random() * words.length);

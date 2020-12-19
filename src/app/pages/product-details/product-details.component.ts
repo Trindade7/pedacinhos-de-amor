@@ -1,6 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import {ProductDetailsService} from './product-details.service';
+import { ProductDetailsService } from './product-details.service';
 
 @Component({
   templateUrl: './product-details.component.html',
@@ -12,26 +12,32 @@ export class ProductDetailsComponent implements OnInit {
   details = '';
   quantity = 1;
 
-  constructor(public productSvc: ProductDetailsService) {}
+  constructor (public productSvc: ProductDetailsService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   addToBasket() {
     this.productSvc
       .addToBasket(this.quantity, this.details)
-      .then(a => console.log(a));
+      .then(
+        res => {
+          console.log(res);
+          this.details = '';
+          this.quantity = 1;
+        }
+      );
     console.log('nbb');
   }
 
   goToPersonalizeOrder(): void {
-    this.navigateToSection('order-options');
+    this._navigateToSection('order-options');
 
     setTimeout(() => {
       this.orderDetails.nativeElement.focus();
     }, 0);
   }
 
-  navigateToSection(section: string) {
+  private _navigateToSection(section: string) {
     window.location.hash = '';
     window.location.hash = section;
   }

@@ -1,17 +1,31 @@
 <div class="basket full-container">
   <section class="container padded">
-    <header class="padded-2-y" nzTypography>
-      <h1>Productos no seu cesto</h1>
+    <header class="padded-2-y flexed" nzTypography>
+      <h1>No seu cesto</h1>
 
-      <div class="flexed center">
-        <button (click)="basketSvc.genMock()"
+      <span class="spacer"></span>
+
+      <div *ngIf="(basketSvc.basket$ |async)?.totalPrice"
+           class="flexed col center">
+        <h3>{{(basketSvc.basket$ |async)?.totalPrice | currency: 'Kzs'}}</h3>
+
+        <button (click)="basketSvc.placeOrder()"
                 nz-button
-                nzType="accent">
-          <i nz-icon nzType="test" nzTheme="fill" nzDanger></i>
-          gen mock
+                nzType="primary">
+          <i nz-icon nzType="shopping-cart" nzTheme="fill"></i>
+          Encomendar
         </button>
       </div>
     </header>
+
+    <div class="flexed center">
+      <button (click)="basketSvc.genMock()"
+              nz-button
+              nzType="accent">
+        <i nz-icon nzType="test" nzTheme="fill" nzDanger></i>
+        gen mock
+      </button>
+    </div>
 
     <ng-container *ngIf="basketSvc.items$ | async as items; else loadingItemsTemplate">
       <ng-container *ngIf="items.length; else emptyBasketTemplate">
